@@ -126,11 +126,6 @@ li a + svg {
   font-size: 1.125rem;
 }
 
-@media screen and (min-width: 105em) {
-  .index {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
 .index span {
   margin-bottom: 0.5rem;
 }
@@ -377,7 +372,7 @@ footer {
   .section-all-tartans {
     width: calc(100% - 192px);
     min-height: calc(100vh - 300px);
-    padding: 2rem 4rem;
+    padding: 2rem;
     margin: 1.5rem auto;
   }
   h1 .listing {
@@ -412,6 +407,15 @@ footer {
 @media screen and (max-height: 500px) {
   main {
     min-height: 500px;
+  }
+}
+
+@media screen and (min-width: 105em) {
+  .index {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .section-all-tartans {
+    padding: 2rem 4rem;
   }
 }
 

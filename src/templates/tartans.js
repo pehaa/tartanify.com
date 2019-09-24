@@ -51,7 +51,6 @@ const TartansListing = ({ pageContext }) => {
       }
     }
   `)
-  console.log(group)
   return (
     <Layout>
       <SEO
