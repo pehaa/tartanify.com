@@ -18,11 +18,17 @@ body {
   font-family: Barlow, sans-serif;
   background: var(--dark-taupe);
   color: var(--white);
+  line-height: 1.5;
 }
 a {
   color: inherit;
+}
+a:not(.underlined-link) {
   text-decoration: none;
   line-height: 1;
+}
+.underlined-link:hover {
+  text-decoration: none;
 }
 header {
   text-align: center;
