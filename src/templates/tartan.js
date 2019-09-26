@@ -26,6 +26,7 @@ class BlogPostTemplate extends React.Component {
     const tartansCsv = this.props.data.tartansCsv
     const uniqueName = tartansCsv.fields.Uniquename
     const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's aavilable both as an svg file or in a PNG format.`
+    console.log(uniqueName)
     return (
       <Layout>
         <SEO title={uniqueName} description={description}></SEO>

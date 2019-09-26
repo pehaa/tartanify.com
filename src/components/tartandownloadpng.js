@@ -4,7 +4,7 @@ class TartanRawSvg extends React.Component {
   constructor(props) {
     super(props)
     this.svg = SvgRaw(this.props)
-    this.img = new Image()
+    this.img = {}
   }
   componentDidMount() {
     const canvas = document.createElement("canvas")
@@ -12,6 +12,7 @@ class TartanRawSvg extends React.Component {
     canvas.height = this.svg.size
     const ctx = canvas.getContext("2d")
     this.img.src = `data:image/svg+xml, ${encodeURIComponent(this.svg.svg)}`
+    this.img = new Image()
     this.img.onload = () => {
       console.log("loaded", this.props.name)
       ctx.drawImage(this.img, 0, 0)

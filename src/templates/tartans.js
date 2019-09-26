@@ -7,14 +7,11 @@ import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
 const PaletteEl = ({ colors, id }) => {
-  console.log(colors)
   const colorsAr = colors.split("#")
   colorsAr.shift()
-  console.log(colorsAr)
   const colorsArray = colorsAr.map(el => {
     return `#${el.split(" ")[0]}`
   })
-  console.log(colorsArray)
   return (
     <ul className="colors">
       {colorsArray.sort().map((el, index) => (
