@@ -29,16 +29,20 @@ const standards = {
   Glr: "#daa520",
   Wh: "#f5deb3",
 }
+// B#2C2C80 BLUE; GO#BC8C00 DARK GOLD; DG#003820 DARK GREEN; LG#289C18 LIGHT GREEN; R#C80000 RED; DT#441800 DARK BROWN; G#006818 GREEN; K#101010 BLACK; LY#C4BC68 LGT YELLOW; W#E0E0E0 WHITE; T#604000 BROWN; BG#009894 TEAL;,LY50 GO16 LY8 T8 GO1 T1 GO1 T1 GO1 T1 GO1 T1 GO1 T1 GO1 T1 GO20 T40 LY12 T24 DG8 GO1 DG1 GO1 DG1 GO1 DG1 GO1 DG1 GO1 DG1 GO1 DG1 GO28 DG6 T4 // LY50 T4 DG4 T4 DG4 T4 DG4 T4 DG4 T4 GO28 LY4 T4 DG20 LY8 T2 LY6 T2 LY6 T8 DG8 GO16,,Not Specified,7712,,,"In his thorough and painstaking 2008 review of Canadian tartans, John Fitzpatrick pointed out that a series of ten tartans from Pik Mills of Quebec City were probably their contribution to the 'Centennial of Confederation' like the 'Fathers of Confederation' series produced by WCWM/Sainthill-Levine. All ten tartans are complex asymmetric designs each with different warp and weft. The threadcounts (taken from the CIDD) remain the same but colours are changed.",Not Specified,,This tartan was recorded prior to the launch of The Scottish Register of Tartans.,,https://www.tartanregister.gov.uk/tartanDetails.aspx?ref=5704
+
 const countPattern = (threadcount, palette) => {
+  const colorsAr = palette.split(";")
+  colorsAr.pop()
   const paletteColors = {
     ...standards,
-    ...palette.split(" ").reduce((acc, curr) => {
+    ...colorsAr.reduce((acc, curr) => {
       const el = curr.split("#")
-      acc[el[0].trim()] = `#${[el[1]]}`
+      const colorCode = el[1].split(" ")
+      acc[el[0].trim()] = `#${colorCode[0]}`
       return acc
     }, {}),
   }
-
   const array = threadcount.split(" ")
   let result = []
   let total = 0

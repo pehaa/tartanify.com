@@ -7,9 +7,14 @@ import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
 const PaletteEl = ({ colors, id }) => {
-  const colorsArray = colors.split(" ").map(el => {
-    return `#${el.split("#")[1]}`
+  console.log(colors)
+  const colorsAr = colors.split("#")
+  colorsAr.shift()
+  console.log(colorsAr)
+  const colorsArray = colorsAr.map(el => {
+    return `#${el.split(" ")[0]}`
   })
+  console.log(colorsArray)
   return (
     <ul className="colors">
       {colorsArray.sort().map((el, index) => (
@@ -44,7 +49,7 @@ const TartansListing = ({ pageContext }) => {
     : `/${pathPrefix}/${(index + 1).toString()}`
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "scottish-scouts" } }) {
+      tartansCsv(fields: { slugg: { eq: "abercrombie" } }) {
         Palette
         Threadcount
         Name

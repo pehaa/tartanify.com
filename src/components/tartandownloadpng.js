@@ -4,18 +4,26 @@ class TartanRawSvg extends React.Component {
   constructor(props) {
     super(props)
     this.svg = SvgRaw(this.props)
+    this.img = new Image()
   }
   componentDidMount() {
     const canvas = document.createElement("canvas")
     canvas.width = this.svg.size
     canvas.height = this.svg.size
     const ctx = canvas.getContext("2d")
-    let img = new Image()
-    img.src = `data:image/svg+xml, ${encodeURIComponent(this.svg.svg)}`
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0)
+    this.img.src = `data:image/svg+xml, ${encodeURIComponent(this.svg.svg)}`
+    this.img.onload = () => {
+      console.log("loaded", this.props.name)
+      ctx.drawImage(this.img, 0, 0)
       this.ref.setAttribute("href", canvas.toDataURL("image/png"))
     }
+  }
+  componentWillUnmount() {
+    if (!this.img) {
+      return
+    }
+    this.img.onload = function() {}
+    delete this.img
   }
   render() {
     return (
