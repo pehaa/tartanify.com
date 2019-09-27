@@ -1,5 +1,4 @@
 import React from "react"
-import SvgRaw from "./svgraw.js"
 class TartanRawSvg extends React.Component {
   render() {
     return (
@@ -7,7 +6,7 @@ class TartanRawSvg extends React.Component {
         download={`${this.props.name}.svg`}
         href-lang="image/svg+xml"
         href={`data:image/svg+xml;utf8,${encodeURIComponent(
-          SvgRaw(this.props).svg
+          this.props.svg.svg
         )}`}
       >
         <span className="icon">&rsaquo;</span>{" "}

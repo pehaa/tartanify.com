@@ -38,7 +38,7 @@ h1 .listing {
 }
 h1 .letter {
   font-size: 3rem;
-  opacity: 0.5;
+  color: var(--dark-taupe);
   display: block;
 }
 h1 .letter + small {
@@ -118,8 +118,8 @@ li a + svg {
   display: none;
 }
 .section-all-tartans {
-  padding: 1rem;
-  width: calc(100% - 96px);
+  padding: 1.5rem;
+  width: calc(100% - 32px);
   margin: 0 auto 6rem;
   position: relative;
   z-index: 2;
@@ -152,6 +152,16 @@ li a + svg {
 .az-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  color: var(--camo-brownie);
+}
+.sidebar > nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .sidebar nav > a {
   margin-bottom: 0.25rem;
@@ -167,12 +177,11 @@ li a + svg {
   box-shadow: inset 0 0px 0 1px #897057;
   border-radius: 20px;*/
   text-transform: uppercase;
-  padding: 0.75rem 0;
+  padding: 0.675rem 0;
   display: block;
   text-align: center;
   display: block;
   text-align: center;
-  border-bottom: 1px solid #b29a82;
 }
 
 main {
@@ -188,6 +197,12 @@ main {
   position: absolute;
   top: 30%;
 }
+.info .info-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  line-height: 1.5rem;
+}
 
 .nav-top,
 .info nav {
@@ -195,18 +210,10 @@ main {
   justify-content: space-between;
   letter-spacing: -0.15px;
   align-items: center;
-  height: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
-.nav-top {
-  position: fixed;
-  top: 50%;
-  transform: translate3d(0, -50%, 0);
-  width: calc(100% - 72px);
-  left: 0;
-  background: var(--camo-brownie);
-  height: 6rem;
-  z-index: 1;
+.info nav {
+  height: 100%;
 }
 .info nav > a {
   display: flex;
@@ -216,7 +223,7 @@ main {
   justify-content: flex-en;
 }
 .info nav .hide-m {
-  max-width: 10rem;
+  max-width: 8rem;
 }
 .info nav .next .hide-m {
   text-align: right;
@@ -225,12 +232,17 @@ main {
 .info nav .prev .hide-m {
   margin-left: 0.5rem;
 }
+.nav-top,
 .info nav {
   position: absolute;
   top: 0;
   width: 100%;
 }
-
+.nav-top {
+  top: 12.5rem;
+  padding: 0 2rem;
+  z-index: 3;
+}
 .icon {
   background: var(--white);
   color: var(--camo-brownie);
@@ -248,12 +260,12 @@ main {
   padding: 1.5rem 3rem;
   margin: auto;
   text-align: center;
-  letter-spacing: -0.46px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  min-height: 9rem;
   line-height: 1;
+  word-wrap: break-word;
 }
 .etiquette {
   box-shadow: 26px 26px 26px 0 rgba(0, 0, 0, 0.71);
@@ -264,7 +276,7 @@ main {
 
 .downloads {
   position: absolute;
-  bottom: 7.5rem;
+  bottom: 10rem;
   width: 100%;
   justify-content: center;
   color: var(--white);
@@ -306,7 +318,7 @@ main {
 }
 footer {
   position: absolute;
-  bottom: 4.5rem;
+  bottom: 6rem;
   left: 0;
   right: 0;
   text-align: center;
@@ -339,8 +351,14 @@ footer {
     width: 128px;
     padding: 0.5rem;
   }
-  .az-list {
-    grid-gap: 0.5rem;
+  .nav-top {
+    position: fixed;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    width: calc(100% - 72px);
+    left: 0;
+    background: var(--camo-brownie);
+    height: 6rem;
   }
   main,
   .nav-top {
@@ -379,27 +397,27 @@ footer {
     width: calc(100% - 192px);
     min-height: calc(100vh - 300px);
     padding: 2rem;
-    margin: 1.5rem auto;
+    margin: 0 auto 1.5rem;
+    z-index: 4;
   }
   h1 .listing {
     font-size: 3rem;
   }
   h1 .letter {
     font-size: 4.5rem;
-  }
-  h1 .letter + small {
-    margin-top: -1rem;
+    line-height: 1;
   }
 }
 
 @media screen and (max-width: 599px) {
+  h1 {
+    font-size: 1.5rem;
+  }
   .hide-sm {
     display: none !important;
   }
   .section-all-tartans {
     box-shadow: none;
-    outline-width: 1px;
-    outline-offset: -6px;
   }
   .index {
     grid-template-columns: 1fr;

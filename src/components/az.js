@@ -37,6 +37,8 @@ const AZ = () => {
           return (
             <li key={letter}>
               <TransitionLink
+                activeStyle={{ color: "white" }}
+                partiallyActive={true}
                 exit={{
                   length: 0.5,
                   trigger: ({ node, e, exit, entry }) =>

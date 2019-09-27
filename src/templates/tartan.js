@@ -1,6 +1,8 @@
 import React from "react"
 import Layout from "../components/layout.js"
-import TartanSvg from "../components/svgbg.js"
+import SvgRaw from "../components/svgraw.js"
+import SvgBg from "../components/svgbg.js"
+import icon from "../assets/icons-informations.svg"
 import TartanSvgDownLoad from "../components/tartandownloadsvg.js"
 import TartanPngDownLoad from "../components/tartandownloadpng.js"
 import { graphql } from "gatsby"
@@ -14,8 +16,10 @@ export const query = graphql`
       Name
       Palette
       Threadcount
+      Origin_URL
       fields {
         Uniquename
+        Optimisedpalette
       }
     }
   }
@@ -25,19 +29,33 @@ class BlogPostTemplate extends React.Component {
     const pageContext = this.props.pageContext
     const tartansCsv = this.props.data.tartansCsv
     const uniqueName = tartansCsv.fields.Uniquename
+    const svg = SvgRaw({
+      palette: tartansCsv.fields.Optimisedpalette,
+      threadcount: tartansCsv.Threadcount,
+    })
     const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's aavilable both as an svg file or in a PNG format.`
     return (
       <Layout>
         <SEO title={uniqueName} description={description}></SEO>
-        <TartanSvg
-          palette={tartansCsv.Palette}
-          threadcount={tartansCsv.Threadcount}
-          name={pageContext.slugg}
-        />
+        <SvgBg svg={svg} />
         <div className={`info info-${this.props.transitionStatus}`}>
           <h1 className="title-font etiquette">
             <span>{uniqueName}</span>
+            {tartansCsv.Origin_URL && (
+              <a
+                className="info-icon"
+                href={tartansCsv.Origin_URL}
+                target="_blank"
+                ref="noopener"
+              >
+                <img
+                  src={icon}
+                  alt="More information - opens in a new window"
+                />
+              </a>
+            )}
           </h1>
+
           <nav>
             {pageContext.previous && (
               <TransitionLink
@@ -79,16 +97,8 @@ class BlogPostTemplate extends React.Component {
           </nav>
         </div>
         <div className="downloads">
-          <TartanSvgDownLoad
-            palette={tartansCsv.Palette}
-            threadcount={tartansCsv.Threadcount}
-            name={pageContext.slugg}
-          />
-          <TartanPngDownLoad
-            palette={tartansCsv.Palette}
-            threadcount={tartansCsv.Threadcount}
-            name={pageContext.slugg}
-          />
+          <TartanSvgDownLoad svg={svg} name={pageContext.slugg} />
+          <TartanPngDownLoad svg={svg} name={pageContext.slugg} />
         </div>
       </Layout>
     )

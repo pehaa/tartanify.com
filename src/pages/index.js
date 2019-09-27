@@ -1,31 +1,32 @@
 import React from "react"
 import Layout from "../components/layout"
-import Header from "../components/header"
-import SvgBg from "../components/svgbg"
+import SvgRaw from "../components/svgraw.js"
+import SvgBg from "../components/svgbg.js"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
 export default () => {
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "hebridean-8" } }) {
-        Palette
+      tartansCsv(fields: { slugg: { eq: "aon" } }) {
         Threadcount
-        Name
+        fields {
+          Optimisedpalette
+        }
       }
     }
   `)
+  const svg = SvgRaw({
+    palette: dataBg.tartansCsv.fields.Optimisedpalette,
+    threadcount: dataBg.tartansCsv.Threadcount,
+  })
   return (
     <Layout>
       <SEO
         description={`A ready-to use collection of tartan patterns. All availabe for download as seamless repetitive tiles in svg and png format.`}
         title={`Welcome!`}
       ></SEO>
-      <SvgBg
-        palette={dataBg.tartansCsv.Palette}
-        threadcount={dataBg.tartansCsv.Threadcount}
-        name={dataBg.tartansCsv.slugg}
-      />
+      <SvgBg svg={svg} />
       <section className="etiquette section-all-tartans">
         <header>
           <h1>Tartan Patterns Collection - v2</h1>

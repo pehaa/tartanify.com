@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
-import SvgBg from "../components/svgbg"
-import { Link } from "gatsby"
+import SvgRaw from "../components/svgraw.js"
+import SvgBg from "../components/svgbg.js"
 import TransitionLink from "gatsby-plugin-transition-link"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
@@ -44,27 +44,24 @@ const TartansListing = ({ pageContext }) => {
     : `/${pathPrefix}/${(index + 1).toString()}`
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "scottish-scouts" } }) {
+      tartansCsv(fields: { slugg: { eq: "corrie" } }) {
         Palette
         Threadcount
         Name
       }
     }
   `)
+  const svg = SvgRaw({
+    palette: dataBg.tartansCsv.Palette,
+    threadcount: dataBg.tartansCsv.Threadcount,
+  })
   return (
     <Layout>
       <SEO
         description={`All Tartans starting by letter ${letter.toUpperCase()} - page ${index} / ${pageCount}`}
         title={`${letter.toUpperCase()} - page ${index}`}
       ></SEO>
-      <SvgBg
-        className={`tartans-bg`}
-        style={{ opacity: 1 }}
-        palette={dataBg.tartansCsv.Palette}
-        threadcount={dataBg.tartansCsv.Threadcount}
-        name={dataBg.tartansCsv.slugg}
-      />
-
+      <SvgBg className={`tartans-bg`} svg={svg} />
       <nav className="nav-top">
         <div className="previousLink">
           {(!first || previousletter) && (
@@ -102,7 +99,7 @@ const TartansListing = ({ pageContext }) => {
       <section className="etiquette section-all-tartans">
         <header>
           <h1>
-            <span className="title-font listing">Listing</span>
+            <span className="title-font listing">A-Z Index</span>
             <span className="title-font letter">{letter.toUpperCase()}</span>
             <small>
               {index} / {pageCount}
@@ -124,7 +121,12 @@ const TartansListing = ({ pageContext }) => {
                   to={`/tartan/${node.fields.slugg}`}
                 >
                   <span>{node.fields.Uniquename}</span>
-                  {<PaletteEl colors={node.Palette} id={node.id} />}
+                  {
+                    <PaletteEl
+                      colors={node.fields.Optimisedpalette}
+                      id={node.id}
+                    />
+                  }
                 </TransitionLink>
               </li>
             )

@@ -1,17 +1,15 @@
 import React from "react"
-import SvgRaw from "./svgraw.js"
 class TartanRawSvg extends React.Component {
   constructor(props) {
     super(props)
-    this.svg = SvgRaw(this.props)
   }
   componentDidMount() {
     const canvas = document.createElement("canvas")
-    canvas.width = this.svg.size
-    canvas.height = this.svg.size
+    canvas.width = this.props.svg.size
+    canvas.height = this.props.svg.size
     const ctx = canvas.getContext("2d")
     let img = new Image()
-    img.src = `data:image/svg+xml, ${encodeURIComponent(this.svg.svg)}`
+    img.src = `data:image/svg+xml, ${encodeURIComponent(this.props.svg.svg)}`
     img.onload = () => {
       ctx.drawImage(img, 0, 0)
       this.ref.setAttribute("href", canvas.toDataURL("image/png"))
@@ -29,7 +27,7 @@ class TartanRawSvg extends React.Component {
         <span className="download-text">
           <span className="hide-sm">Download as </span>PNG
         </span>
-        <small className="hide-sm">{`(${this.svg.size}x${this.svg.size}px)`}</small>
+        <small className="hide-sm">{`(${this.props.svg.size}x${this.props.svg.size}px)`}</small>
       </a>
     )
   }

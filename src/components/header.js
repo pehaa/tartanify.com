@@ -1,12 +1,22 @@
 import React from "react"
-import useSiteMetadata from "../hooks/user-sitemetadata.js"
+import logo from "../assets/logo-header.svg"
+import TransitionLink from "gatsby-plugin-transition-link"
 const Header = () => {
-  const { title, description } = useSiteMetadata()
   return (
-    <header>
-      <h1>{title}</h1>
-      <p>{description}</p>
-    </header>
+    <>
+      <TransitionLink
+        exit={{
+          length: 0.5,
+        }}
+        entry={{
+          length: 0.5,
+        }}
+        className="logo-link"
+        to="/"
+      >
+        <img className="logo" src={logo} alt="tartanify.io" />
+      </TransitionLink>
+    </>
   )
 }
 

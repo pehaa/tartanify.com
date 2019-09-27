@@ -47,7 +47,9 @@ exports.createPages = async ({ graphql, actions }) => {
     "u",
     "v",
     "w",
+    "x",
     "y",
+    "z",
   ]
   let allResults = {}
   for (var i = 0; i < letters.length; i++) {
@@ -60,10 +62,10 @@ exports.createPages = async ({ graphql, actions }) => {
               Name
               id
               Palette
-              Threadcount
               fields {
                 slugg
                 Uniquename
+                Optimisedpalette
               }
             }
           }
@@ -104,9 +106,11 @@ exports.createPages = async ({ graphql, actions }) => {
             id
             Palette
             Threadcount
+            Origin_URL
             fields {
               slugg
               Uniquename
+              Optimisedpalette
             }
           }
         }
@@ -151,6 +155,16 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     } else {
       i = 1
     }
+
+    const colorsAr = node.Palette.split(";")
+    colorsAr.pop()
+    const paletteValue = colorsAr.reduce((acc, curr) => {
+      const el = curr.split("#")
+      const colorCode = el[1].split(" ")
+      acc += `${el[0].trim()}#${colorCode[0]} `
+      return acc
+    }, "")
+
     slugs.push(value)
     createNodeField({
       name: `slugg`,
@@ -161,6 +175,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `Uniquename`,
       node,
       value: nameValue,
+    })
+    createNodeField({
+      name: `Optimisedpalette`,
+      node,
+      value: paletteValue.trim(),
     })
   }
 }
