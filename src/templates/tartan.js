@@ -6,13 +6,12 @@ import Info from "../components/info.js"
 import TartanSvgDownLoad from "../components/tartandownloadsvg.js"
 import TartanPngDownLoad from "../components/tartandownloadpng.js"
 import { graphql } from "gatsby"
-import TransitionLink from "gatsby-plugin-transition-link"
+import MyLink from "../components/mylink.js"
 import SEO from "../components/seo"
 
 export const query = graphql`
   query($id: String!) {
     tartansCsv(id: { eq: $id }) {
-      Category
       Name
       Palette
       Threadcount
@@ -46,13 +45,7 @@ class BlogPostTemplate extends React.Component {
 
           <nav className="nav">
             {pageContext.previous && (
-              <TransitionLink
-                exit={{
-                  length: 0.5,
-                }}
-                entry={{
-                  length: 0.5,
-                }}
+              <MyLink
                 className="prev"
                 to={`/tartan/${pageContext.previous.fields.slugg}`}
                 rel="prev"
@@ -61,17 +54,10 @@ class BlogPostTemplate extends React.Component {
                 <span className="hide-m">
                   {pageContext.previous.fields.Uniquename}
                 </span>
-              </TransitionLink>
+              </MyLink>
             )}
             {pageContext.next && (
-              <TransitionLink
-                exit={{
-                  length: 0.5,
-                }}
-                entry={{
-                  delay: 0,
-                  length: 0.5,
-                }}
+              <MyLink
                 className="next"
                 to={`/tartan/${pageContext.next.fields.slugg}`}
                 rel="next"
@@ -80,7 +66,7 @@ class BlogPostTemplate extends React.Component {
                   {pageContext.next.fields.Uniquename}
                 </span>
                 <span className="icon">&rsaquo;</span>
-              </TransitionLink>
+              </MyLink>
             )}
             <Info className="info-icon hide-plus" url={tartansCsv.Origin_URL} />
           </nav>

@@ -50,8 +50,11 @@ export default () => {
         <p>
           That's why, for each pattern, we provide a link to its page in{" "}
           <a
-            class="underlined-link"
+            className="underlined-link"
             href="https://www.tartanregister.gov.uk/tartanDetails"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="the Scottish Registry of Patterns - opens in a new window"
           >
             the Scottish Registry of Patterns.
           </a>{" "}

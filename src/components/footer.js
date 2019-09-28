@@ -1,6 +1,6 @@
 import React from "react"
 import useSiteMetadata from "../hooks/user-sitemetadata.js"
-import TransitionLink from "gatsby-plugin-transition-link"
+import MyLink from "./mylink"
 
 const Footer = () => {
   const { author } = useSiteMetadata()
@@ -8,18 +8,9 @@ const Footer = () => {
     <footer>
       <p>
         Woven with ❤️by {author}. Please check the{" "}
-        <TransitionLink
-          className="underlined-link"
-          exit={{
-            length: 0.5,
-          }}
-          entry={{
-            length: 0.5,
-          }}
-          to="/terms-of-use"
-        >
+        <MyLink className="underlined-link" to="/terms-of-use">
           Terms of Use.
-        </TransitionLink>
+        </MyLink>
       </p>
     </footer>
   )

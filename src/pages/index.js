@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SvgRaw from "../components/svgraw.js"
 import SvgBg from "../components/svgbg.js"
-import TransitionLink from "gatsby-plugin-transition-link"
+import MyLink from "../components/mylink"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -34,50 +34,23 @@ export default () => {
             A 5k+ Collection of{" "}
             <span className="title-font letter">Tartan Patterns</span>
           </h1>
-          <p>We've gathered for you 5496 tartan patters. </p>
+          <p>We've gathered for you 5495 tartan patters. </p>
           <p>
             All ready to download and use as repeating tiles in SVG and PNG
             format.
           </p>
           <p>
-            <TransitionLink
-              exit={{
-                length: 0.5,
-              }}
-              entry={{
-                length: 0.5,
-              }}
-              className="underlined-link"
-              to="/about"
-            >
+            <MyLink className="underlined-link" to="/about">
               Learn more about
-            </TransitionLink>{" "}
+            </MyLink>{" "}
             this project, check the{" "}
-            <TransitionLink
-              exit={{
-                length: 0.5,
-              }}
-              entry={{
-                length: 0.5,
-              }}
-              className="underlined-link"
-              to="/terms-of-use"
-            >
+            <MyLink className="underlined-link" to="/terms-of-use">
               terms of use
-            </TransitionLink>{" "}
+            </MyLink>{" "}
             or{" "}
-            <TransitionLink
-              exit={{
-                length: 0.5,
-              }}
-              entry={{
-                length: 0.5,
-              }}
-              className="underlined-link"
-              to="/tartans/a"
-            >
+            <MyLink className="underlined-link" to="/tartans/a">
               start browsing.
-            </TransitionLink>
+            </MyLink>
           </p>
         </header>
       </section>

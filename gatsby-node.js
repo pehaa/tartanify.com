@@ -93,7 +93,7 @@ exports.createPages = async ({ graphql, actions }) => {
         all: tartans,
       },
       buildPath: (index, pathPrefix) =>
-        index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`, // This is optional and this is the default
+        index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`,
     })
   }
 
