@@ -43,20 +43,22 @@ class BlogPostTemplate extends React.Component {
             <span>{uniqueName}</span>
             {tartansCsv.Origin_URL && (
               <a
-                className="info-icon"
+                className="info-icon hide-sm"
                 href={tartansCsv.Origin_URL}
                 target="_blank"
-                ref="noopener"
+                rel="noopener noreferrer"
               >
                 <img
                   src={icon}
+                  width="16"
+                  height="16"
                   alt="More information - opens in a new window"
                 />
               </a>
             )}
           </h1>
 
-          <nav>
+          <nav className="nav">
             {pageContext.previous && (
               <TransitionLink
                 exit={{
@@ -93,6 +95,21 @@ class BlogPostTemplate extends React.Component {
                 </span>
                 <span className="icon">&rsaquo;</span>
               </TransitionLink>
+            )}
+            {tartansCsv.Origin_URL && (
+              <a
+                className="info-icon hide-plus"
+                href={tartansCsv.Origin_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={icon}
+                  width="16"
+                  height="16"
+                  alt="More information - opens in a new window"
+                />
+              </a>
             )}
           </nav>
         </div>

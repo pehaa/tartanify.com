@@ -62,7 +62,7 @@ const TartansListing = ({ pageContext }) => {
         title={`${letter.toUpperCase()} - page ${index}`}
       ></SEO>
       <SvgBg className={`tartans-bg`} svg={svg} />
-      <nav className="nav-top">
+      <nav className="nav-top nav">
         <div className="previousLink">
           {(!first || previousletter) && (
             <TransitionLink
@@ -141,6 +141,42 @@ const TartansListing = ({ pageContext }) => {
             </>
           )}
         </ul>
+        {group.length > 30 && (
+          <nav className="hide-plus nav">
+            <div className="previousLink">
+              {(!first || previousletter) && (
+                <TransitionLink
+                  exit={{
+                    length: 0.5,
+                  }}
+                  entry={{
+                    length: 0.5,
+                  }}
+                  to={previousUrl}
+                  aria-label="Go to Previous Page"
+                >
+                  <span className="icon">&lsaquo;</span>
+                </TransitionLink>
+              )}
+            </div>
+            <div className="nextLink">
+              {(!last || nextletter) && (
+                <TransitionLink
+                  exit={{
+                    length: 0.5,
+                  }}
+                  entry={{
+                    length: 0.5,
+                  }}
+                  to={nextUrl}
+                  aria-label="Go to Next Page "
+                >
+                  <span className="icon">&rsaquo;</span>
+                </TransitionLink>
+              )}
+            </div>
+          </nav>
+        )}
       </section>
     </Layout>
   )

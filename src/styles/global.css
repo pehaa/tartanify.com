@@ -40,6 +40,7 @@ h1 .letter {
   font-size: 3rem;
   color: var(--dark-taupe);
   display: block;
+  line-height: 1;
 }
 h1 .letter + small {
   font-size: 1rem;
@@ -117,6 +118,7 @@ ul {
 li a + svg {
   display: none;
 }
+.section-home,
 .section-all-tartans {
   padding: 1.5rem;
   width: calc(100% - 32px);
@@ -201,11 +203,12 @@ main {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  line-height: 1.5rem;
+  line-height: 1rem;
 }
-
-.nav-top,
-.info nav {
+.info-icon img {
+  vertical-align: top;
+}
+.nav {
   display: flex;
   justify-content: space-between;
   letter-spacing: -0.15px;
@@ -223,7 +226,7 @@ main {
   justify-content: flex-en;
 }
 .info nav .hide-m {
-  max-width: 8rem;
+  width: 8rem;
 }
 .info nav .next .hide-m {
   text-align: right;
@@ -393,6 +396,7 @@ footer {
   .downloads a {
     padding: 1.1875rem 2rem;
   }
+  .section-home,
   .section-all-tartans {
     width: calc(100% - 192px);
     min-height: calc(100vh - 300px);
@@ -400,12 +404,22 @@ footer {
     margin: 0 auto 1.5rem;
     z-index: 4;
   }
+  .section-home {
+    max-width: 50rem;
+  }
+  .section-home p {
+    font-size: 1.25rem;
+    margin: 0;
+  }
   h1 .listing {
     font-size: 3rem;
   }
-  h1 .letter {
+
+  .section-all-tartans .letter {
     font-size: 4.5rem;
-    line-height: 1;
+  }
+  .hide-plus {
+    display: none !important;
   }
 }
 
@@ -423,7 +437,7 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 60em) {
   .hide-m {
     display: none !important;
   }
@@ -433,7 +447,14 @@ footer {
     min-height: 500px;
   }
 }
-
+@media screen and (min-width: 60em) {
+  .section-home .letter {
+    font-size: 4.5rem;
+  }
+  .section-home {
+    padding: 4rem;
+  }
+}
 @media screen and (min-width: 105em) {
   .index {
     grid-template-columns: repeat(6, 1fr);

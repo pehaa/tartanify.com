@@ -16,7 +16,7 @@ const Footer = () => {
           entry={{
             length: 0.5,
           }}
-          to="/license"
+          to="/terms-of-use"
         >
           Terms of Use.
         </TransitionLink>

@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const el = letters[i]
     const allResults = await graphql(`
       query {
-        allTartansCsv(limit: -1, filter: {Name: {regex: "/^${el}/i"}}) {
+        allTartansCsv(filter: {Name: {regex: "/^${el}/i"}}) {
           edges {
             node {
               Name
@@ -99,7 +99,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const allResultsAtOnce = await graphql(`
     query {
-      allTartansCsv(limit: -1) {
+      allTartansCsv {
         edges {
           node {
             Name
