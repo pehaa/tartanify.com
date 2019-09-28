@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout.js"
 import SvgRaw from "../components/svgraw.js"
 import SvgBg from "../components/svgbg.js"
-import icon from "../assets/icons-informations.svg"
+import Info from "../components/info.js"
 import TartanSvgDownLoad from "../components/tartandownloadsvg.js"
 import TartanPngDownLoad from "../components/tartandownloadpng.js"
 import { graphql } from "gatsby"
@@ -41,21 +41,7 @@ class BlogPostTemplate extends React.Component {
         <div className={`info info-${this.props.transitionStatus}`}>
           <h1 className="title-font etiquette">
             <span>{uniqueName}</span>
-            {tartansCsv.Origin_URL && (
-              <a
-                className="info-icon hide-sm"
-                href={tartansCsv.Origin_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={icon}
-                  width="16"
-                  height="16"
-                  alt="More information - opens in a new window"
-                />
-              </a>
-            )}
+            <Info className="info-icon" url={tartansCsv.Origin_URL} />
           </h1>
 
           <nav className="nav">
@@ -96,21 +82,7 @@ class BlogPostTemplate extends React.Component {
                 <span className="icon">&rsaquo;</span>
               </TransitionLink>
             )}
-            {tartansCsv.Origin_URL && (
-              <a
-                className="info-icon hide-plus"
-                href={tartansCsv.Origin_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={icon}
-                  width="16"
-                  height="16"
-                  alt="More information - opens in a new window"
-                />
-              </a>
-            )}
+            <Info className="info-icon hide-plus" url={tartansCsv.Origin_URL} />
           </nav>
         </div>
         <div className="downloads">

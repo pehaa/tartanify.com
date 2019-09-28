@@ -33,7 +33,8 @@ export default () => {
         </header>
         <p>
           On Tartanify.com you will find SVG and PNG pattern tiles generated
-          from the threadcount and color parameters.
+          from the threadcount and color parameters. The data we used comes from
+          The national repository of tartans.
         </p>
         <p>
           Some of the older tartans are now in the public domain which means
@@ -55,7 +56,7 @@ export default () => {
             the Scottish Registry of Patterns.
           </a>{" "}
           Following that link, you will find some details concerning each
-          tartan, in particular the possible restrictions of its use.
+          tartan, in particular the possible restrictions of use.
         </p>
       </section>
     </Layout>
