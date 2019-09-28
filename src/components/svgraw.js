@@ -19,16 +19,28 @@ const countPattern = (threadcount, palette) => {
     console.log(el)
     return { fill: "#000000", size: 0 }
   })
-
-  for (var i = 0; i < 2 * array.length - 2; i++) {
-    const index = i < array.length - 1 ? i : 2 * array.length - 2 - i
-    result.push(colCountArray[index])
-  }
-  if (total % 2) {
+  if (array[0].indexOf("/") > -1) {
     for (var i = 0; i < 2 * array.length - 2; i++) {
-      result.push(result[i])
+      const index = i < array.length - 1 ? i : 2 * array.length - 2 - i
+      result.push(colCountArray[index])
+    }
+    if (total % 2) {
+      for (var i = 0; i < 2 * array.length - 2; i++) {
+        result.push(result[i])
+      }
+    }
+  } else {
+    for (var i = 0; i < array.length - 1; i++) {
+      const index = i
+      result.push(colCountArray[index])
+    }
+    if (total % 2) {
+      for (var i = 0; i < array.length - 1; i++) {
+        result.push(result[i])
+      }
     }
   }
+
   return result
 }
 const SvgRaw = props => {
