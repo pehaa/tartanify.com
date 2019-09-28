@@ -12,7 +12,7 @@ const PaletteEl = ({ colors, id }) => {
   })
   return (
     <ul className="colors">
-      {colorsArray.sort().map((el, index) => (
+      {colorsArray.map((el, index) => (
         <li
           key={`${id}-${index}`}
           className="color"
@@ -33,9 +33,12 @@ const TartansListing = ({ pageContext }) => {
     letter,
     previousletter,
     nextletter,
+    previousletterlast,
   } = pageContext
   const previousUrl = first
-    ? `/tartans/${previousletter}`
+    ? previousletterlast === 1
+      ? `/tartans/${previousletter}`
+      : `/tartans/${previousletter}/${previousletterlast}`
     : index - 1 === 1
     ? `/${pathPrefix}`
     : `/${pathPrefix}/${(index - 1).toString()}`

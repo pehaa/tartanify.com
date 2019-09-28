@@ -1,5 +1,6 @@
 const path = require(`path`)
 const createPaginatedPages = require("gatsby-paginate")
+const pageLength = 60
 
 const slugify = string => {
   const a =
@@ -52,6 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
     "z",
   ]
   let allResults = {}
+  let prevLetterLast = 1
   for (var i = 0; i < letters.length; i++) {
     const el = letters[i]
     const allResults = await graphql(`
@@ -77,24 +79,26 @@ exports.createPages = async ({ graphql, actions }) => {
     if (allResults.errors) {
       throw allResults.errors
     }
-
     const tartans = allResults.data.allTartansCsv.edges
-
     createPaginatedPages({
       edges: tartans,
       createPage: createPage,
       pageTemplate: "src/templates/tartans.js",
-      pageLength: 60,
+      pageLength: pageLength,
       pathPrefix: `tartans/${el}`,
       context: {
         letter: el,
         previousletter: i > 0 ? letters[i - 1] : "",
+        previousletterlast: prevLetterLast,
         nextletter: i < letters.length - 1 ? letters[i + 1] : "",
         all: tartans,
       },
       buildPath: (index, pathPrefix) =>
         index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`,
     })
+    prevLetterLast = Math.ceil(
+      allResults.data.allTartansCsv.totalCount / pageLength
+    )
   }
 
   const allResultsAtOnce = await graphql(`
