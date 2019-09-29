@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `SVG Tartan Collection`,
+    title: `Tartanify.com`,
     author: `PeHaa & Joe Vains`,
     description: `Tartan Patterns Collection. Over 5000 free tartan patterns in SVG and PNG format.`,
     siteUrl: `https://tartanify.com/`,
