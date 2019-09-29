@@ -42,7 +42,7 @@ h1 .letter {
   display: block;
   line-height: 1;
 }
-h1 .letter + small {
+h1 .letter ~ small {
   font-size: 1rem;
   display: block;
   margin-top: -0.5rem;
@@ -221,6 +221,9 @@ main {
 .info nav > a {
   display: flex;
   align-items: center;
+}
+.info nav .next:first-child {
+  margin: auto 0 auto auto;
 }
 .info .next {
   justify-content: flex-en;

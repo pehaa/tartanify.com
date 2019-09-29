@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SvgRaw from "../components/svgraw.js"
 import SvgBg from "../components/svgbg.js"
-import TransitionLink from "gatsby-plugin-transition-link"
+import MyLink from "../components/mylink"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -68,34 +68,16 @@ const TartansListing = ({ pageContext }) => {
       <nav className="nav-top nav">
         <div className="previousLink">
           {(!first || previousletter) && (
-            <TransitionLink
-              exit={{
-                length: 0.5,
-              }}
-              entry={{
-                length: 0.5,
-              }}
-              to={previousUrl}
-              aria-label="Go to Previous Page"
-            >
+            <MyLink to={previousUrl} aria-label="Go to Previous Page">
               <span className="icon">&lsaquo;</span>
-            </TransitionLink>
+            </MyLink>
           )}
         </div>
         <div className="nextLink">
           {(!last || nextletter) && (
-            <TransitionLink
-              exit={{
-                length: 0.5,
-              }}
-              entry={{
-                length: 0.5,
-              }}
-              to={nextUrl}
-              aria-label="Go to Next Page "
-            >
+            <MyLink to={nextUrl} aria-label="Go to Next Page ">
               <span className="icon">&rsaquo;</span>
-            </TransitionLink>
+            </MyLink>
           )}
         </div>
       </nav>
@@ -107,22 +89,16 @@ const TartansListing = ({ pageContext }) => {
             <small>
               {index} / {pageCount}
             </small>
+            <small>
+              ({group[0].node.Name} - {group[group.length - 1].node.Name})
+            </small>
           </h1>
         </header>
         <ul className="index">
           {group.map(({ node }) => {
             return (
               <li className="index-el" key={node.id}>
-                <TransitionLink
-                  exit={{
-                    length: 0.5,
-                  }}
-                  entry={{
-                    delay: 0,
-                    length: 0.5,
-                  }}
-                  to={`/tartan/${node.fields.slugg}`}
-                >
+                <MyLink to={`/tartan/${node.fields.slugg}`}>
                   <span>{node.fields.Uniquename}</span>
                   {
                     <PaletteEl
@@ -130,7 +106,7 @@ const TartansListing = ({ pageContext }) => {
                       id={node.id}
                     />
                   }
-                </TransitionLink>
+                </MyLink>
               </li>
             )
           })}
@@ -148,34 +124,16 @@ const TartansListing = ({ pageContext }) => {
           <nav className="hide-plus nav">
             <div className="previousLink">
               {(!first || previousletter) && (
-                <TransitionLink
-                  exit={{
-                    length: 0.5,
-                  }}
-                  entry={{
-                    length: 0.5,
-                  }}
-                  to={previousUrl}
-                  aria-label="Go to Previous Page"
-                >
+                <MyLink to={previousUrl} aria-label="Go to Previous Page">
                   <span className="icon">&lsaquo;</span>
-                </TransitionLink>
+                </MyLink>
               )}
             </div>
             <div className="nextLink">
               {(!last || nextletter) && (
-                <TransitionLink
-                  exit={{
-                    length: 0.5,
-                  }}
-                  entry={{
-                    length: 0.5,
-                  }}
-                  to={nextUrl}
-                  aria-label="Go to Next Page "
-                >
+                <MyLink to={nextUrl} aria-label="Go to Next Page ">
                   <span className="icon">&rsaquo;</span>
-                </TransitionLink>
+                </MyLink>
               )}
             </div>
           </nav>

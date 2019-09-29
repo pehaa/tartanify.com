@@ -8,7 +8,7 @@ import { useStaticQuery, graphql } from "gatsby"
 export default () => {
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "aon" } }) {
+      tartansCsv(fields: { slugg: { eq: "argentina" } }) {
         Threadcount
         fields {
           Optimisedpalette
@@ -66,7 +66,7 @@ export default () => {
               gatsby.js.
             </a>{" "}
             It uses a CSV file for the content. The CSV file contains the name
-            of the pattern, its color palette, its threadcount and the link to
+            of each pattern, its color palette, its threadcount and the link to
             the its page in the official registry. This data comes from{" "}
             <a
               className="underlined-link"
@@ -78,6 +78,9 @@ export default () => {
               the Scottish Registry of Patterns.
             </a>{" "}
           </p>
+        </section>
+        <section>
+          <h2>About Us</h2>
         </section>
       </section>
     </Layout>

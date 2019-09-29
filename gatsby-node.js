@@ -91,7 +91,6 @@ exports.createPages = async ({ graphql, actions }) => {
         previousletter: i > 0 ? letters[i - 1] : "",
         previousletterlast: prevLetterLast,
         nextletter: i < letters.length - 1 ? letters[i + 1] : "",
-        all: tartans,
       },
       buildPath: (index, pathPrefix) =>
         index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`,
