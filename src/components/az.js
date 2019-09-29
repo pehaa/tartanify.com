@@ -5,7 +5,7 @@ import MyLink from "./mylink.js"
 const AZ = () => {
   const edges = usePagesAZOrder()
   return (
-    <nav>
+    <>
       <MyLink to="/">Home</MyLink>
       <MyLink to="/about">About</MyLink>
       {/*<h2>Tartans in Alphabetical order</h2>*/}
@@ -25,7 +25,7 @@ const AZ = () => {
           )
         })}
       </ul>
-    </nav>
+    </>
   )
 }
 
