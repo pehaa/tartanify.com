@@ -27,14 +27,24 @@ export default () => {
         title={`Licence  information`}
       ></SEO>
       <SvgBg svg={svg} />
-      <section className="etiquette section-all-tartans">
+      <section className="etiquette section-page">
         <header>
-          <h1 className="title-font">Terms of Use</h1>
+          <h1 className="title-font">
+            <span className="letter">Terms of Use</span>
+          </h1>
         </header>
         <p>
           On Tartanify.com you will find SVG and PNG pattern tiles generated
-          from the threadcount and color parameters. The data we used comes from
-          The national repository of tartans.
+          from the threadcount and color parameters. The data we used comes from{" "}
+          <a
+            className="underlined-link"
+            href="https://www.tartanregister.gov.uk/tartanDetails"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="the Scottish Register of Tartans - opens in a new window"
+          >
+            the Scottish Register of Tartans.
+          </a>
         </p>
         <p>
           Some of the older tartans are now in the public domain which means
@@ -54,9 +64,9 @@ export default () => {
             href="https://www.tartanregister.gov.uk/tartanDetails"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="the Scottish Registry of Patterns - opens in a new window"
+            aria-label="the Scottish Register of Tartans - opens in a new window"
           >
-            the Scottish Registry of Patterns.
+            the Scottish Register of Tartans.
           </a>{" "}
           Following that link, you will find some details concerning each
           tartan, in particular the possible restrictions of use.

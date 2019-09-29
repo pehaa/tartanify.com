@@ -9,8 +9,8 @@ module.exports = {
   siteMetadata: {
     title: `SVG Tartan Collection`,
     author: `PeHaa & Joe Vains`,
-    description: `Tartans as ready-to-use seamless patterns in svg and png formats.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    description: `Tartan Patterns Collection. Over 5000 free tartan patterns in SVG and PNG format.`,
+    siteUrl: `https://tartanify.com/`,
     social: {
       twitter: `pehaa`,
     },

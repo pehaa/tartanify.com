@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "tartanify.com",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Tartans from csv file with gatsby",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
@@ -15,6 +15,7 @@
   "dependencies": {
     "gatsby": "^2.15.12",
     "gatsby-paginate": "^1.1.1",
+    "gatsby-plugin-favicon": "^3.1.6",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.1.7",
     "gatsby-plugin-transition-link": "^1.13.0",

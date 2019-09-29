@@ -89,9 +89,12 @@ const TartansListing = ({ pageContext }) => {
             <small>
               {index} / {pageCount}
             </small>
-            <small>
-              ({group[0].node.Name} - {group[group.length - 1].node.Name})
-            </small>
+            <span className="discrete">
+              <span className="ellipsis">{group[0].node.Name}</span>-
+              <span className="ellipsis">
+                {group[group.length - 1].node.Name}
+              </span>
+            </span>
           </h1>
         </header>
         <ul className="index">

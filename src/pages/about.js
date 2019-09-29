@@ -3,6 +3,9 @@ import Layout from "../components/layout.js"
 import SvgRaw from "../components/svgraw.js"
 import SvgBg from "../components/svgbg.js"
 import SEO from "../components/seo"
+import twitter from "../assets/icons-social-twitter.svg"
+import dribbble from "../assets/icons-social-dribble.svg"
+import codepen from "../assets/icons-social-codepen.svg"
 import { useStaticQuery, graphql } from "gatsby"
 
 export default () => {
@@ -27,9 +30,11 @@ export default () => {
         title={`About`}
       ></SEO>
       <SvgBg svg={svg} />
-      <section className="etiquette section-all-tartans">
+      <section className="etiquette section-page section-about">
         <header>
-          <h1 className="title-font">About this project</h1>
+          <h1 className="title-font">
+            <span className="letter">About</span>
+          </h1>
         </header>
         <p>
           According to{" "}
@@ -41,10 +46,9 @@ export default () => {
           >
             Wikipedia,
           </a>{" "}
-          tartan is a pattern consisting of criss-crossed horizontal and
-          vertical bands in multiple colours. Tartans are particularly
-          associated with Scotland since Scottish kilts almost always use them
-          as patterns.
+          tartan is a pattern consisting of crisscrossed horizontal and vertical
+          bands in multiple colors. Tartans are particularly associated with
+          Scotland since Scottish kilts almost always use them as patterns.
         </p>
         <p>
           Both of us, PeHaa and Joe Vains, work a lot with patterns in the
@@ -54,7 +58,7 @@ export default () => {
           And each one seems more beautiful than the other.
         </p>
         <section>
-          <h2>Technical details</h2>
+          <h2 className="title-font">Technical details</h2>
           <p>
             Tartanify.com is a static site, built with{" "}
             <a
@@ -66,21 +70,100 @@ export default () => {
               gatsby.js.
             </a>{" "}
             It uses a CSV file for the content. The CSV file contains the name
-            of each pattern, its color palette, its threadcount and the link to
-            the its page in the official registry. This data comes from{" "}
+            of each pattern, its color palette, its "threadcount" and the link
+            to its page in the official register. This data comes from{" "}
             <a
               className="underlined-link"
               href="https://www.tartanregister.gov.uk/tartanDetails"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="the Scottish Registry of Patterns - opens in a new window"
+              aria-label="the Scottish Register of Tartans - opens in a new window"
             >
-              the Scottish Registry of Patterns.
+              the Scottish Register of Tartans.
             </a>{" "}
           </p>
         </section>
         <section>
-          <h2>About Us</h2>
+          <h2 className="title-font">About Us</h2>
+          <p>
+            PeHaa and Joe Vains are a Polish/French couple living in Paris. They
+            share a passion for web design and love working together on side
+            projects.
+          </p>
+          <div className="grid-about">
+            <section>
+              <header>
+                <div className="title-social-icons">
+                  <h3>Joe Vains</h3>
+                  <a
+                    href="https://twitter.com/joevains"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={twitter}
+                      alt="Follow Joe Vains on Twitter - opens in a new window"
+                    ></img>
+                  </a>
+                  <a
+                    href="https://dribbble.com/joevains"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={dribbble}
+                      alt="Follow Joe Vains on Dribbble - opens in a new window"
+                    ></img>
+                  </a>
+                </div>
+                <p className="role">Web designer</p>
+              </header>
+              <p className="description">
+                Joe Vains, aka Sylvain Guizard, was the designer and the
+                originator of the tartanify project.
+              </p>
+            </section>
+            <section>
+              <header>
+                <div className="title-social-icons">
+                  <h3>PeHaa</h3>
+                  <a
+                    href="https://twitter.com/pehaa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={twitter}
+                      alt="Follow PeHaa on Twitter - opens in a new window"
+                    ></img>
+                  </a>
+                  <a
+                    href="https://codepen.io/pehaa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={codepen}
+                      alt="Follow PeHaa on Codepen - opens in a new window"
+                    ></img>
+                  </a>
+                </div>
+                <p className="role">Front-end Developer</p>
+              </header>
+              <p className="description">
+                PeHaa, aka Paulina Hetman, is a front-end developer, web
+                designer, and trainer. You can learn more about her work on{" "}
+                <a
+                  className="underlined-link"
+                  href="https://pehaa.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  pehaa.com.
+                </a>
+              </p>
+            </section>
+          </div>
         </section>
       </section>
     </Layout>

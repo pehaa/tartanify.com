@@ -17,7 +17,7 @@ export default ({ children }) => {
       <div className="sidebar">
         <nav>
           <AZ />
-          <Share />
+          <Share className="share-link" />
         </nav>
       </div>
     </>

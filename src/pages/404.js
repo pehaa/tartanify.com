@@ -24,9 +24,12 @@ export default () => {
     <Layout>
       <SEO description={`404 error - Page not found.`} title={`404`}></SEO>
       <SvgBg svg={svg} />
-      <section className="etiquette section-all-tartans">
+      <section className="etiquette section-page section-404">
         <header>
-          <h1 className="title-font">404 - Page not found</h1>
+          <h1 className="title-font">
+            <span className="letter">404</span>
+            <span>Page not found</span>
+          </h1>
         </header>
         <p>We are sorry, but we can’t find the page you were looking for.</p>
       </section>

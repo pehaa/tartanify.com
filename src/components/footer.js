@@ -7,7 +7,11 @@ const Footer = () => {
   return (
     <footer>
       <p>
-        Woven with ❤️by {author}. Please check the{" "}
+        Woven with{" "}
+        <span role="img" aria-label="love">
+          ❤️
+        </span>{" "}
+        by {author}. Please check the{" "}
         <MyLink className="underlined-link" to="/terms-of-use">
           Terms of Use.
         </MyLink>

@@ -5,7 +5,6 @@ const countPattern = (threadcount, palette) => {
     acc[el[0].trim()] = `#${[el[1]]}`
     return acc
   }, {})
-
   const array = threadcount.split(" ")
   let result = []
   let total = 0
@@ -30,7 +29,7 @@ const countPattern = (threadcount, palette) => {
       }
     }
   } else {
-    for (var i = 0; i < array.length - 1; i++) {
+    for (var i = 0; i < array.length; i++) {
       const index = i
       result.push(colCountArray[index])
     }
@@ -40,7 +39,6 @@ const countPattern = (threadcount, palette) => {
       }
     }
   }
-
   return result
 }
 const SvgRaw = props => {

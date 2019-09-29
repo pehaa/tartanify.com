@@ -10,6 +10,9 @@
 ::after {
   box-sizing: border-box;
 }
+*:nth-child(n) {
+  font-weight: 400;
+}
 html {
   overflow-y: scroll;
 }
@@ -33,8 +36,14 @@ a:not(.underlined-link) {
 header {
   text-align: center;
 }
+.section-all-tartans h1 {
+  margin-bottom: 3rem;
+}
 h1 .listing {
   font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
 }
 h1 .letter {
   font-size: 3rem;
@@ -45,7 +54,7 @@ h1 .letter {
 h1 .letter ~ small {
   font-size: 1rem;
   display: block;
-  margin-top: -0.5rem;
+  margin-top: -0.25rem;
 }
 ul {
   list-style: none;
@@ -55,7 +64,6 @@ ul {
   margin-top: 0;
 }
 .title-font {
-  font-weight: 400;
   font-family: "Alfa Slab One";
 }
 .bgtartan {
@@ -118,7 +126,7 @@ ul {
 li a + svg {
   display: none;
 }
-.section-home,
+.section-page,
 .section-all-tartans {
   padding: 1.5rem;
   width: calc(100% - 32px);
@@ -150,11 +158,12 @@ li a + svg {
   box-shadow: -16px 0 16px 0 rgba(0, 0, 0, 0.5);
   background-color: var(--dark-taupe);
 }
-
+.sidebar nav {
+  color: var(--camo-brownie);
+}
 .az-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  color: var(--camo-brownie);
 }
 .sidebar > nav {
   position: absolute;
@@ -162,30 +171,37 @@ li a + svg {
   bottom: 0;
   left: 0;
   right: 0;
+  padding: 1rem 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.sidebar nav a {
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  display: block;
+  text-align: center;
+  display: block;
+  text-align: center;
+  transition: 0.3s;
+}
+.sidebar nav a:hover,
+.sidebar nav a[aria-current="page"] {
+  color: white;
+}
 .sidebar nav > a {
+  padding: 0.75rem 0;
+  color: black;
   margin-bottom: 0.25rem;
   letter-spacing: 2px;
 }
-.sidebar nav a {
-  /*padding: 0.5rem 0;
-  display: block;
-  text-align: center;
-  display: block;
-  text-align: center;
-  border: 2px solid #574632;
-  box-shadow: inset 0 0px 0 1px #897057;
-  border-radius: 20px;*/
-  text-transform: uppercase;
-  padding: 0.675rem 0;
-  display: block;
-  text-align: center;
-  display: block;
-  text-align: center;
+.sidebar .share-link {
+  text-transform: none;
 }
-
+.sidebar .share-link img {
+  display: block;
+  margin: auto auto 0.5rem;
+}
 main {
   position: relative;
   width: calc(100% - 72px);
@@ -274,7 +290,6 @@ main {
   word-wrap: break-word;
 }
 .etiquette {
-  box-shadow: 26px 26px 26px 0 rgba(0, 0, 0, 0.71);
   background-color: var(--black);
   outline: 2px dashed var(--dark-taupe);
   outline-offset: -10px;
@@ -324,7 +339,7 @@ main {
 }
 footer {
   position: absolute;
-  bottom: 6rem;
+  bottom: 3rem;
   left: 0;
   right: 0;
   text-align: center;
@@ -399,7 +414,7 @@ footer {
   .downloads a {
     padding: 1.1875rem 2rem;
   }
-  .section-home,
+  .section-page,
   .section-all-tartans {
     width: calc(100% - 192px);
     min-height: calc(100vh - 300px);
@@ -407,11 +422,16 @@ footer {
     margin: 0 auto 1.5rem;
     z-index: 4;
   }
+  .section-page {
+    max-width: 60rem;
+  }
   .section-home {
     max-width: 50rem;
   }
-  .section-home p {
+  .section-page p:not(.description) {
     font-size: 1.25rem;
+  }
+  .section-home p {
     margin: 0;
   }
   h1 .listing {
@@ -424,6 +444,9 @@ footer {
   .hide-plus {
     display: none !important;
   }
+  .etiquette {
+    box-shadow: 26px 26px 26px 0 rgba(0, 0, 0, 0.71);
+  }
 }
 
 @media screen and (max-width: 599px) {
@@ -432,6 +455,9 @@ footer {
   }
   .hide-sm {
     display: none !important;
+  }
+  .sidebar .share-link span {
+    display: none;
   }
   .section-all-tartans {
     box-shadow: none;
@@ -447,15 +473,20 @@ footer {
 }
 @media screen and (max-height: 500px) {
   main {
-    min-height: 500px;
+    min-height: 600px;
   }
 }
 @media screen and (min-width: 60em) {
-  .section-home .letter {
+  .section-page h1 .letter {
     font-size: 4.5rem;
   }
-  .section-home {
+  .section-page {
     padding: 4rem;
+  }
+  .grid-about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
   }
 }
 @media screen and (min-width: 105em) {
@@ -467,6 +498,37 @@ footer {
   }
 }
 
+.discrete {
+  opacity: 0.5;
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+}
+.grid-about header {
+  text-align: left;
+}
+.title-social-icons {
+  display: flex;
+  align-items: center;
+}
+.title-social-icons > * {
+  margin: 0 0.5rem 0 0;
+}
+
+.role {
+  color: var(--dark-taupe);
+  font-size: 1.125rem;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 6em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.section-404 p {
+  text-align: center;
+}
 .tl-wrapper-status--entering + .tl-wrapper-status--exiting .logo-link,
 .tl-wrapper-status--entering + .tl-wrapper-status--exiting .sidebar {
   visibility: hidden;

@@ -15,7 +15,18 @@ const SEO = ({ title, description, lang = "en" }) => {
       titleTemplate={`%s | ${site.title}`}
     >
       <meta name="description" content={seo.description} />
-      <meta name="og:title" content={seo.title} />
+      <meta property="og:url" content="https://tartanify.com" />
+      <meta property="og:title" content={site.title} />
+      <meta property="og:description" content={site.description} />
+      <meta
+        property="og:image"
+        content="https://tartanify.com/twitter-preview.jgp"
+      />
+      <meta name="twitter:title" content={site.title} />
+      <meta
+        name="twitter:image"
+        content="https://tartanify.com/twitter-preview.jgp"
+      />
     </Helmet>
   )
 }

@@ -1,5 +1,5 @@
 import React from "react"
-import icon from "../assets/icons-informations.svg"
+import icon from "../assets/icons-share.svg"
 
 const Share = props => {
   const message = encodeURIComponent(
@@ -14,11 +14,11 @@ const Share = props => {
     >
       <img
         src={icon}
-        width="16"
-        height="16"
-        alt="More information - opens in a new window"
+        width="24"
+        height="24"
+        alt="Share on Twitter - opens in new window"
       />
-      Share on Twitter
+      <span>Share on Twitter</span>
     </a>
   )
 }

@@ -9,7 +9,7 @@ import { useStaticQuery, graphql } from "gatsby"
 export default () => {
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "aon" } }) {
+      tartansCsv(fields: { slugg: { eq: "davis" } }) {
         Threadcount
         fields {
           Optimisedpalette
@@ -28,13 +28,13 @@ export default () => {
         title={`Welcome!`}
       ></SEO>
       <SvgBg svg={svg} />
-      <section className="etiquette section-home ">
+      <section className="etiquette section-page section-home ">
         <header>
           <h1>
             A 5k+ Collection of{" "}
             <span className="title-font letter">Tartan Patterns</span>
           </h1>
-          <p>We've gathered for you 5495 tartan patters. </p>
+          <p>We've gathered for you over 5000 tartan patters. </p>
           <p>
             All ready to download and use as repeating tiles in SVG and PNG
             format.
