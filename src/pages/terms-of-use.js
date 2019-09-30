@@ -38,7 +38,7 @@ export default () => {
           from the threadcount and color parameters. The data we used comes from{" "}
           <a
             className="underlined-link"
-            href="https://www.tartanregister.gov.uk/tartanDetails"
+            href="https://www.tartanregister.gov.uk/index"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="the Scottish Register of Tartans - opens in a new window"
@@ -61,7 +61,7 @@ export default () => {
           That's why, for each pattern, we provide a link to its page in{" "}
           <a
             className="underlined-link"
-            href="https://www.tartanregister.gov.uk/tartanDetails"
+            href="https://www.tartanregister.gov.uk/index"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="the Scottish Register of Tartans - opens in a new window"
