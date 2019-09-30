@@ -75,7 +75,6 @@ ul {
   z-index: -1;
   width: auto;
   height: auto;
-  transition: 1s 0.125s;
   background-position: center center;
 }
 .bgtartan:after {
@@ -93,21 +92,6 @@ ul {
 }
 .tartans-bg:after {
   background-color: rgba(114, 91, 69, 0.5);
-}
-
-.tl-wrapper-status--entering .bgtartan {
-  animation: in 0.5s;
-}
-.tl-wrapper-status--exiting .bgtartan {
-  opacity: 0;
-}
-@keyframes in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .colors {
@@ -340,8 +324,8 @@ main {
 footer {
   position: absolute;
   bottom: 3rem;
-  left: 0;
-  right: 0;
+  left: 1rem;
+  right: 1rem;
   text-align: center;
   color: var(--white);
   font-size: 0.875rem;
@@ -528,6 +512,21 @@ footer {
 }
 .section-404 p {
   text-align: center;
+}
+
+.tl-wrapper-status--entering .bgtartan {
+  animation: in 0.5s;
+}
+.tl-wrapper-status--exiting .bgtartan {
+  /*opacity: 0;*/
+}
+@keyframes in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .tl-wrapper-status--entering + .tl-wrapper-status--exiting .logo-link,
 .tl-wrapper-status--entering + .tl-wrapper-status--exiting .sidebar {
