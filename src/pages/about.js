@@ -74,7 +74,7 @@ export default () => {
             to its page in the official register. This data comes from{" "}
             <a
               className="underlined-link"
-              href="https://www.tartanregister.gov.uk/tartanDetails"
+              href="https://www.tartanregister.gov.uk/index"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="the Scottish Register of Tartans - opens in a new window"

@@ -35,7 +35,8 @@ export default () => {
         </header>
         <p>
           On Tartanify.com you will find SVG and PNG pattern tiles generated
-          from the threadcount and color parameters. The data we used comes from{" "}
+          from their "threadcount" and color parameters. The data we used comes
+          from{" "}
           <a
             className="underlined-link"
             href="https://www.tartanregister.gov.uk/index"
@@ -47,13 +48,13 @@ export default () => {
           </a>
         </p>
         <p>
-          Some of the older tartans are now in the public domain which means
+          Some of the older tartans are now in the public domain, which means
           that they are not protected by intellectual property laws such as
           copyright.
         </p>
         <p>
           Still, you should keep in mind that many others have legally-binding
-          copyright restrictions on weaving or other usage due to commercial or
+          copyright restrictions on weaving or other usages due to commercial or
           other interests.
         </p>
 
@@ -69,7 +70,7 @@ export default () => {
             the Scottish Register of Tartans.
           </a>{" "}
           Following that link, you will find some details concerning each
-          tartan, in particular the possible restrictions of use.
+          tartan, in particular, the possible restrictions of use.
         </p>
       </section>
     </Layout>
