@@ -1,8 +1,5 @@
 import React from "react"
 class TartanRawSvg extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     const canvas = document.createElement("canvas")
     canvas.width = this.props.svg.size
