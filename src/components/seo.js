@@ -20,13 +20,13 @@ const SEO = ({ title, description, lang = "en" }) => {
       <meta property="og:description" content={site.description} />
       <meta
         property="og:image"
-        content="https://tartanify.com/twitter-preview.jgp"
+        content="https://tartanify.com/twitter-preview.jpg"
       />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="@pehaa" />
       <meta name="twitter:title" content={site.title} />
-      <meta
-        name="twitter:image"
-        content="https://tartanify.com/twitter-preview.jgp"
-      />
+      <meta name="twitter:description" content={site.description} />
+      <meta name="twitter:image" content="https://tartanify.com/favicon.png" />
     </Helmet>
   )
 }
