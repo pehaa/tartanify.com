@@ -32,7 +32,7 @@ class BlogPostTemplate extends React.Component {
       palette: tartansCsv.fields.Optimisedpalette,
       threadcount: tartansCsv.Threadcount,
     })
-    const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's aavilable both as an svg file or in a PNG format.`
+    const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's available both as an svg file or in a PNG format.`
     return (
       <Layout>
         <SEO title={uniqueName} description={description}></SEO>

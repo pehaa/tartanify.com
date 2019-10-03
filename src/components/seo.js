@@ -16,16 +16,16 @@ const SEO = ({ title, description, lang = "en" }) => {
     >
       <meta name="description" content={seo.description} />
       <meta property="og:url" content="https://tartanify.com" />
-      <meta property="og:title" content={site.title} />
-      <meta property="og:description" content={site.description} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
       <meta
         property="og:image"
         content="https://tartanify.com/twitter-preview.jpg"
       />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@pehaa" />
-      <meta name="twitter:title" content={site.title} />
-      <meta name="twitter:description" content={site.description} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content="https://tartanify.com/favicon.png" />
     </Helmet>
   )
