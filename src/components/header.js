@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <MyLink className="logo-link" to="/">
-        <img className="logo" src={logo} alt="tartanify.io" />
+        <img className="logo" src={logo} alt="tartanify.com" />
       </MyLink>
     </>
   )
