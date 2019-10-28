@@ -2,9 +2,10 @@ import React from "react"
 class TartanRawSvg extends React.Component {
   componentDidMount() {
     const canvas = document.createElement("canvas")
-    canvas.width = this.props.svg.size
-    canvas.height = this.props.svg.size
+    canvas.width = 2 * this.props.svg.size
+    canvas.height = 2 * this.props.svg.size
     const ctx = canvas.getContext("2d")
+    ctx.scale(2, 2)
     let img = new Image()
     img.src = `data:image/svg+xml, ${encodeURIComponent(this.props.svg.svg)}`
     img.onload = () => {
@@ -24,7 +25,8 @@ class TartanRawSvg extends React.Component {
         <span className="download-text">
           <span className="hide-sm">Download as </span>PNG
         </span>
-        <small className="hide-sm">{`(${this.props.svg.size}x${this.props.svg.size}px)`}</small>
+        <small className="hide-sm">{`(${2 * this.props.svg.size}x${2 *
+          this.props.svg.size}px)`}</small>
       </a>
     )
   }
