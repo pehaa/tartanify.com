@@ -25,7 +25,7 @@ export default () => {
     <Layout>
       <SEO
         description={`A ready-to use collection of tartan patterns. All available for download as seamless repetitive tiles in svg and png format.`}
-        title={`Welcome!`}
+        title={`5k+ Tartan Patterns`}
       ></SEO>
       <SvgBg svg={svg} />
       <section className="etiquette section-page section-home ">
