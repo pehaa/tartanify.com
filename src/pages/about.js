@@ -13,14 +13,12 @@ export default () => {
     {
       tartansCsv(fields: { slugg: { eq: "argentina" } }) {
         Threadcount
-        fields {
-          Optimisedpalette
-        }
+        Palette
       }
     }
   `)
   const svg = SvgRaw({
-    palette: dataBg.tartansCsv.fields.Optimisedpalette,
+    palette: dataBg.tartansCsv.Palette,
     threadcount: dataBg.tartansCsv.Threadcount,
   })
   return (

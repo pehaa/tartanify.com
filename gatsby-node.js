@@ -67,7 +67,6 @@ exports.createPages = async ({ graphql, actions }) => {
               fields {
                 slugg
                 Uniquename
-                Optimisedpalette
               }
             }
           }
@@ -113,7 +112,6 @@ exports.createPages = async ({ graphql, actions }) => {
             fields {
               slugg
               Uniquename
-              Optimisedpalette
             }
           }
         }
@@ -159,15 +157,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       i = 1
     }
 
-    const colorsAr = node.Palette.split(";")
-    colorsAr.pop()
-    const paletteValue = colorsAr.reduce((acc, curr) => {
-      const el = curr.split("#")
-      const colorCode = el[1].split(" ")
-      acc += `${el[0].trim()}#${colorCode[0]} `
-      return acc
-    }, "")
-
     slugs.push(value)
     createNodeField({
       name: `slugg`,
@@ -178,11 +167,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `Uniquename`,
       node,
       value: nameValue,
-    })
-    createNodeField({
-      name: `Optimisedpalette`,
-      node,
-      value: paletteValue.trim(),
     })
   }
 }

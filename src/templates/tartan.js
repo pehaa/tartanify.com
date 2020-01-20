@@ -15,10 +15,10 @@ export const query = graphql`
       Name
       Palette
       Threadcount
+      Palette
       Origin_URL
       fields {
         Uniquename
-        Optimisedpalette
       }
     }
   }
@@ -29,7 +29,7 @@ class BlogPostTemplate extends React.Component {
     const tartansCsv = this.props.data.tartansCsv
     const uniqueName = tartansCsv.fields.Uniquename
     const svg = SvgRaw({
-      palette: tartansCsv.fields.Optimisedpalette,
+      palette: tartansCsv.Palette,
       threadcount: tartansCsv.Threadcount,
     })
     const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's available both as an svg file or in a PNG format.`
