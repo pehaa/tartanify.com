@@ -1,5 +1,5 @@
 const path = require(`path`)
-const createPaginatedPages = require("gatsby-paginate")
+const createPaginatedPages = require("./gatsby-paginate")
 const pageLength = 60
 
 const slugify = string => {
@@ -23,7 +23,7 @@ const slugify = string => {
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const tartanPost = path.resolve(`./src/templates/tartan.js`)
+  const tartanTemplate = path.resolve(`./src/templates/tartan.js`)
   const letters = [
     "a",
     "b",
@@ -52,7 +52,7 @@ exports.createPages = async ({ graphql, actions }) => {
     "y",
     "z",
   ]
-  let allResults = {}
+
   let prevLetterLast = 1
   for (var i = 0; i < letters.length; i++) {
     const el = letters[i]
@@ -91,8 +91,6 @@ exports.createPages = async ({ graphql, actions }) => {
         previousletterlast: prevLetterLast,
         nextletter: i < letters.length - 1 ? letters[i + 1] : "",
       },
-      buildPath: (index, pathPrefix) =>
-        index > 1 ? `${pathPrefix}/${index}` : `/${pathPrefix}`,
     })
     prevLetterLast = Math.ceil(
       allResults.data.allTartansCsv.totalCount / pageLength
@@ -132,7 +130,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     createPage({
       path: `/tartan/${post.node.fields.slugg}`,
-      component: tartanPost,
+      component: tartanTemplate,
       context: {
         id: post.node.id,
         slugg: post.node.fields.slugg,

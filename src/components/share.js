@@ -1,13 +1,13 @@
 import React from "react"
 import icon from "../assets/icons-share.svg"
 
-const Share = props => {
+const Share = ({ className }) => {
   const message = encodeURIComponent(
     "Tartanify.com - Tartan Patterns Collection - 5k+ free tartan patterns in SVG and PNG format."
   )
   return (
     <a
-      className={props.className}
+      className={className}
       href={`https://twitter.com/intent/tweet?text=${message}&url=https://tartanify.com&via=PeHaa`}
       target="_blank"
       rel="noopener noreferrer"

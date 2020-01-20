@@ -45,6 +45,7 @@ const TartansListing = ({ pageContext }) => {
   const nextUrl = last
     ? `/tartans/${nextletter}`
     : `/${pathPrefix}/${(index + 1).toString()}`
+
   const dataBg = useStaticQuery(graphql`
     {
       tartansCsv(fields: { slugg: { eq: "corrie" } }) {
