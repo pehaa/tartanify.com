@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
-import SvgRaw from "../components/svgraw.js"
+import SvgTile from "../components/svgtile.js"
 import SvgBg from "../components/svgbg.js"
 import MyLink from "../components/mylink"
 import SEO from "../components/seo"
@@ -55,7 +55,7 @@ const TartansListing = ({ pageContext }) => {
       }
     }
   `)
-  const svg = SvgRaw({
+  const svg = SvgTile({
     palette: dataBg.tartansCsv.Palette,
     threadcount: dataBg.tartansCsv.Threadcount,
   })

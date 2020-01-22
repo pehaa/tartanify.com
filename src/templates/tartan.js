@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout.js"
-import SvgRaw from "../components/svgraw.js"
+import SvgTile from "../components/svgtile.js"
 import SvgBg from "../components/svgbg.js"
 import Info from "../components/info.js"
 import DownLoadAsSvg from "../components/tartandownloadsvg.js"
@@ -26,10 +26,12 @@ const TartanTemplate = props => {
   const pageContext = props.pageContext
   const tartansCsv = props.data.tartansCsv
   const uniqueName = tartansCsv.fields.Uniquename
-  const svg = SvgRaw({
+
+  const svg = SvgTile({
     palette: tartansCsv.Palette,
     threadcount: tartansCsv.Threadcount,
   })
+
   const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's available both as an svg file or in a PNG format.`
   return (
     <Layout>

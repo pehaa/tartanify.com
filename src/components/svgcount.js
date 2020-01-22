@@ -1,5 +1,3 @@
-import svgDefs from "./svgdefs.js"
-
 const countPattern = (threadcount, palette) => {
   const paletteColors = palette.split(" ").reduce((acc, curr) => {
     const el = curr.split("#")
@@ -42,33 +40,5 @@ const countPattern = (threadcount, palette) => {
   }
   return result
 }
-const SvgRaw = props => {
-  const { palette, threadcount } = props
-  const tartanCount = countPattern(threadcount, palette)
 
-  const cumulativeSum = (sum => value => (sum += value))(0)
-  const cumSizes = tartanCount.map(el => el.size).map(cumulativeSum)
-
-  const size = cumSizes[cumSizes.length - 1]
-
-  console.log(tartanCount)
-
-  let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" x="0"  y="0" xmlns="http://www.w3.org/2000/svg">
-    ${svgDefs()}
-    <g id="horizStripes">`
-  tartanCount.forEach(({ fill, size }, index) => {
-    svg += `<rect fill="${fill}" height="${size}" width="100%" x="0" y="${
-      cumSizes[index - 1]
-    }"/>`
-  })
-  svg += `</g><g id="vertStripes" mask="url(#grating)">`
-  tartanCount.forEach(({ fill, size }, index) => {
-    svg += `<rect fill="${fill}" width="${size}" height="100%" y="0" x="${
-      cumSizes[index - 1]
-    }"/>`
-  })
-  svg += `</g></svg>`
-  return { svg: svg, size: size }
-}
-
-export default SvgRaw
+export default countPattern

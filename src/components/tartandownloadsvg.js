@@ -1,11 +1,15 @@
 import React from "react"
+import ReactDOMServer from "react-dom/server"
 
 const DownLoadAsSvg = ({ svg, name }) => {
+  console.log(svg)
   return (
     <a
       download={`${name}.svg`}
       href-lang="image/svg+xml"
-      href={`data:image/svg+xml;utf8,${encodeURIComponent(svg.svg)}`}
+      href={`data:image/svg+xml;utf8,${encodeURIComponent(
+        ReactDOMServer.renderToString(svg)
+      )}`}
     >
       <span className="icon">&rsaquo;</span>{" "}
       <span className="download-text">

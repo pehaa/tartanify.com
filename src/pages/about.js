@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout.js"
-import SvgRaw from "../components/svgraw.js"
+import SvgTile from "../components/svgtile.js"
 import SvgBg from "../components/svgbg.js"
 import SEO from "../components/seo"
 import twitter from "../assets/icons-social-twitter.svg"
@@ -17,7 +17,7 @@ export default () => {
       }
     }
   `)
-  const svg = SvgRaw({
+  const svg = SvgTile({
     palette: dataBg.tartansCsv.Palette,
     threadcount: dataBg.tartansCsv.Threadcount,
   })
