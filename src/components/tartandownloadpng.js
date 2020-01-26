@@ -1,24 +1,26 @@
 import React, { useRef, useEffect } from "react"
-import ReactDOMServer from "react-dom/server"
+import svgAsString from "./svgasstring"
 
 const DownLoadAsPng = ({ svg, name }) => {
   const aEl = useRef(null)
 
   const size = svg.props.width
-  const string = ReactDOMServer.renderToString(svg)
+  const string = svgAsString(svg)
   useEffect(() => {
     console.log("will use effect")
     const canvas = document.createElement("canvas")
+    // multiply by 2 for high-res screens
     canvas.width = 2 * size
     canvas.height = 2 * size
     const ctx = canvas.getContext("2d")
+    // multiply by 2 for high-res screens
     ctx.scale(2, 2)
     let img = new Image()
-    img.src = `data:image/svg+xml,${encodeURIComponent(string)}`
     img.onload = () => {
       ctx.drawImage(img, 0, 0)
       aEl.current.setAttribute("href", canvas.toDataURL("image/png"))
     }
+    img.src = `data:image/svg+xml,${string}`
   }, [string, size])
 
   return (

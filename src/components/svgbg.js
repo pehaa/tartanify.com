@@ -1,15 +1,13 @@
 import React from "react"
-import ReactDOMServer from "react-dom/server"
+import svgAsString from "./svgasstring"
 
-const SvgBg = props => {
+const SvgBg = ({ svg, style, className }) => {
   return (
     <div
-      className={`bgtartan ${props.className}`}
+      className={`bgtartan ${className}`}
       style={{
-        backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-          ReactDOMServer.renderToString(props.svg)
-        )}")`,
-        ...props.style,
+        backgroundImage: `url("data:image/svg+xml;utf8,${svgAsString(svg)}")`,
+        ...style,
       }}
     ></div>
   )

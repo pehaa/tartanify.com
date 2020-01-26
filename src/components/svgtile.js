@@ -11,8 +11,6 @@ const SvgTile = props => {
 
   const size = cumulativeSizes[cumulativeSizes.length - 1]
 
-  console.log(tartanCount)
-
   return (
     <svg
       viewBox={`0 0 ${size} ${size}`}
