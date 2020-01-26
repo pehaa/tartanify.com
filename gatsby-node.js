@@ -38,7 +38,7 @@ exports.createPages = async ({ graphql, actions }) => {
               id
               Palette
               fields {
-                slugg
+                slug
                 Unique_Name
               }
             }
@@ -81,19 +81,19 @@ exports.createPages = async ({ graphql, actions }) => {
             Threadcount
             Origin_URL
             fields {
-              slugg
+              slug
               Unique_Name
             }
           }
           previous {
             fields {
+              slug
               Unique_Name
-              slugg
             }
           }
           next {
             fields {
-              slugg
+              slug
               Unique_Name
             }
           }
@@ -110,11 +110,11 @@ exports.createPages = async ({ graphql, actions }) => {
   const tartansAtOnce = allResultsAtOnce.data.allTartansCsv.edges
   tartansAtOnce.forEach(({ node, next, previous }) => {
     createPage({
-      path: `/tartan/${node.fields.slugg}`,
+      path: `/tartan/${node.fields.slug}`,
       component: tartanTemplate,
       context: {
         id: node.id,
-        slugg: node.fields.slugg,
+        slug: node.fields.slug,
         previous,
         next,
       },
@@ -138,7 +138,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
     slugs.push(value)
     createNodeField({
-      name: `slugg`,
+      name: `slug`,
       node,
       value,
     })

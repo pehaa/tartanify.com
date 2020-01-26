@@ -47,7 +47,7 @@ const TartanTemplate = props => {
           {pageContext.previous && (
             <MyLink
               className="prev"
-              to={`/tartan/${pageContext.previous.fields.slugg}`}
+              to={`/tartan/${pageContext.previous.fields.slug}`}
               rel="prev"
             >
               <span className="icon">&lsaquo;</span>
@@ -59,7 +59,7 @@ const TartanTemplate = props => {
           {pageContext.next && (
             <MyLink
               className="next"
-              to={`/tartan/${pageContext.next.fields.slugg}`}
+              to={`/tartan/${pageContext.next.fields.slug}`}
               rel="next"
             >
               <span className="hide-m">
@@ -72,8 +72,8 @@ const TartanTemplate = props => {
         </nav>
       </div>
       <div className="downloads">
-        <DownLoadAsSvg svg={svg} name={pageContext.slugg} />
-        <DownLoadAsPng svg={svg} name={pageContext.slugg} />
+        <DownLoadAsSvg svg={svg} name={pageContext.slug} />
+        <DownLoadAsPng svg={svg} name={pageContext.slug} />
       </div>
     </Layout>
   )

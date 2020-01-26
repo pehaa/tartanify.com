@@ -9,7 +9,7 @@ import { useStaticQuery, graphql } from "gatsby"
 export default () => {
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "davis" } }) {
+      tartansCsv(fields: { slug: { eq: "davis" } }) {
         Threadcount
         Palette
       }

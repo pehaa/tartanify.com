@@ -48,7 +48,7 @@ const TartansListing = ({ pageContext }) => {
 
   const dataBg = useStaticQuery(graphql`
     {
-      tartansCsv(fields: { slugg: { eq: "corrie" } }) {
+      tartansCsv(fields: { slug: { eq: "corrie" } }) {
         Palette
         Threadcount
         Name
@@ -102,7 +102,7 @@ const TartansListing = ({ pageContext }) => {
           {group.map(({ node }) => {
             return (
               <li className="index-el" key={node.id}>
-                <MyLink to={`/tartan/${node.fields.slugg}`}>
+                <MyLink to={`/tartan/${node.fields.slug}`}>
                   <span>{node.fields.Unique_Name}</span>
                   {<PaletteEl colors={node.Palette} id={node.id} />}
                 </MyLink>
