@@ -103,7 +103,7 @@ const TartansListing = ({ pageContext }) => {
             return (
               <li className="index-el" key={node.id}>
                 <MyLink to={`/tartan/${node.fields.slugg}`}>
-                  <span>{node.fields.Uniquename}</span>
+                  <span>{node.fields.Unique_Name}</span>
                   {<PaletteEl colors={node.Palette} id={node.id} />}
                 </MyLink>
               </li>

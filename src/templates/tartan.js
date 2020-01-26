@@ -17,7 +17,7 @@ export const query = graphql`
       Threadcount
       Origin_URL
       fields {
-        Uniquename
+        Unique_Name
       }
     }
   }
@@ -25,21 +25,21 @@ export const query = graphql`
 const TartanTemplate = props => {
   const pageContext = props.pageContext
   const tartansCsv = props.data.tartansCsv
-  const uniqueName = tartansCsv.fields.Uniquename
+  const Unique_Name = tartansCsv.fields.Unique_Name
 
   const svg = SvgTile({
     palette: tartansCsv.Palette,
     threadcount: tartansCsv.Threadcount,
   })
 
-  const description = `You can download here this beautiful seamless ${uniqueName} tartan pattern. It's available both as an svg file or in a PNG format.`
+  const description = `You can download here this beautiful seamless ${Unique_Name} tartan pattern. It's available both as an svg file or in a PNG format.`
   return (
     <Layout>
-      <SEO title={uniqueName} description={description}></SEO>
+      <SEO title={Unique_Name} description={description}></SEO>
       <SvgBg svg={svg} />
       <div className={`info info-${props.transitionStatus}`}>
         <h1 className="title-font etiquette">
-          <span>{uniqueName}</span>
+          <span>{Unique_Name}</span>
           <Info className="info-icon" url={tartansCsv.Origin_URL} />
         </h1>
 
@@ -52,7 +52,7 @@ const TartanTemplate = props => {
             >
               <span className="icon">&lsaquo;</span>
               <span className="hide-m">
-                {pageContext.previous.fields.Uniquename}
+                {pageContext.previous.fields.Unique_Name}
               </span>
             </MyLink>
           )}
@@ -63,7 +63,7 @@ const TartanTemplate = props => {
               rel="next"
             >
               <span className="hide-m">
-                {pageContext.next.fields.Uniquename}
+                {pageContext.next.fields.Unique_Name}
               </span>
               <span className="icon">&rsaquo;</span>
             </MyLink>

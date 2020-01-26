@@ -24,34 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const tartanTemplate = path.resolve(`./src/templates/tartan.js`)
-  const letters = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ]
+  const letters = "abcdefghijklmnopqrstuvwxyz".split("")
 
   let prevLetterLast = 1
   for (var i = 0; i < letters.length; i++) {
@@ -66,7 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
               Palette
               fields {
                 slugg
-                Uniquename
+                Unique_Name
               }
             }
           }
@@ -109,7 +82,19 @@ exports.createPages = async ({ graphql, actions }) => {
             Origin_URL
             fields {
               slugg
-              Uniquename
+              Unique_Name
+            }
+          }
+          previous {
+            fields {
+              Unique_Name
+              slugg
+            }
+          }
+          next {
+            fields {
+              slugg
+              Unique_Name
             }
           }
         }
@@ -123,17 +108,13 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const tartansAtOnce = allResultsAtOnce.data.allTartansCsv.edges
-  tartansAtOnce.forEach((post, index) => {
-    const next =
-      index === tartansAtOnce.length - 1 ? null : tartansAtOnce[index + 1].node
-    const previous = index === 0 ? null : tartansAtOnce[index - 1].node
-
+  tartansAtOnce.forEach(({ node, next, previous }) => {
     createPage({
-      path: `/tartan/${post.node.fields.slugg}`,
+      path: `/tartan/${node.fields.slugg}`,
       component: tartanTemplate,
       context: {
-        id: post.node.id,
-        slugg: post.node.fields.slugg,
+        id: node.id,
+        slugg: node.fields.slugg,
         previous,
         next,
       },
@@ -162,7 +143,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
     createNodeField({
-      name: `Uniquename`,
+      name: `Unique_Name`,
       node,
       value: nameValue,
     })
