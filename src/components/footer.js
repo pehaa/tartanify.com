@@ -1,5 +1,5 @@
 import React from "react"
-import useSiteMetadata from "../hooks/user-sitemetadata.js"
+import useSiteMetadata from "../hooks/usesitemetadata"
 import MyLink from "./mylink"
 
 const Footer = () => {

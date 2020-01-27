@@ -9,14 +9,14 @@ const createPagination = (array, pageLength) => {
 }
 
 const createPaginatedPages = ({
-  edges,
+  nodes,
   createPage,
   pageLength = 10,
   pageTemplate,
   pathPrefix = ``,
   context = {},
 }) => {
-  const groups = createPagination(edges, pageLength)
+  const groups = createPagination(nodes, pageLength)
   const paginationTemplate = path.resolve(pageTemplate)
   groups.forEach((group, index, groups) => {
     return createPage({

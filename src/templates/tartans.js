@@ -91,15 +91,13 @@ const TartansListing = ({ pageContext }) => {
               {index} / {pageCount}
             </small>
             <span className="discrete">
-              <span className="ellipsis">{group[0].node.Name}</span>-
-              <span className="ellipsis">
-                {group[group.length - 1].node.Name}
-              </span>
+              <span className="ellipsis">{group[0].Name}</span>-
+              <span className="ellipsis">{group[group.length - 1].Name}</span>
             </span>
           </h1>
         </header>
         <ul className="index">
-          {group.map(({ node }) => {
+          {group.map(node => {
             return (
               <li className="index-el" key={node.id}>
                 <MyLink to={`/tartan/${node.fields.slug}`}>

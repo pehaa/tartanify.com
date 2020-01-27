@@ -32,15 +32,13 @@ exports.createPages = async ({ graphql, actions }) => {
     const allResults = await graphql(`
       query {
         allTartansCsv(filter: {Name: {regex: "/^${el}/i"}}) {
-          edges {
-            node {
-              Name
-              id
-              Palette
-              fields {
-                slug
-                Unique_Name
-              }
+          nodes {
+            Name
+            id
+            Palette
+            fields {
+              slug
+              Unique_Name
             }
           }
           totalCount
@@ -51,9 +49,9 @@ exports.createPages = async ({ graphql, actions }) => {
     if (allResults.errors) {
       throw allResults.errors
     }
-    const tartans = allResults.data.allTartansCsv.edges
+    const nodes = allResults.data.allTartansCsv.nodes
     createPaginatedPages({
-      edges: tartans,
+      nodes,
       createPage: createPage,
       pageTemplate: "src/templates/tartans.js",
       pageLength: pageLength,
@@ -121,6 +119,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
 let slugs = []
 let i = 1
 exports.onCreateNode = ({ node, actions, getNode }) => {

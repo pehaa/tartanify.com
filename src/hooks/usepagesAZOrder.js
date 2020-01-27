@@ -4,18 +4,16 @@ const usePagesAZOrder = () => {
   const data = useStaticQuery(graphql`
     {
       allSitePage(filter: { path: { regex: "/^/tartans/.$/i" } }) {
-        edges {
-          node {
-            context {
-              pageCount
-            }
-            path
+        nodes {
+          context {
+            pageCount
           }
+          path
         }
       }
     }
   `)
-  return data.allSitePage.edges
+  return data.allSitePage.nodes
 }
 
 export default usePagesAZOrder

@@ -1,23 +1,23 @@
 import React from "react"
-import usePagesAZOrder from "../hooks/user-pagesAZOrder.js"
+import usePagesAZOrder from "../hooks/usepagesAZOrder"
 import MyLink from "./mylink.js"
 
 const AZ = () => {
-  const edges = usePagesAZOrder()
+  const nodes = usePagesAZOrder()
   return (
     <>
       <MyLink to="/">Home</MyLink>
       <MyLink to="/about">About</MyLink>
       {/*<h2>Tartans in Alphabetical order</h2>*/}
       <ul className="az-list title-font">
-        {edges.map(({ node }) => {
-          const letter = node.path.charAt(node.path.length - 1)
+        {nodes.map(({ path }) => {
+          const letter = path.charAt(path.length - 1)
           return (
             <li key={letter}>
               <MyLink
                 activeStyle={{ color: "white" }}
                 partiallyActive={true}
-                to={node.path}
+                to={path}
               >
                 {letter.toUpperCase()}
               </MyLink>
