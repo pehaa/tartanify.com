@@ -1,35 +1,26 @@
 const path = require(`path`)
-const createPaginatedPages = require("./gatsby-paginate")
+const slugify = require("./src/utils/slugify")
+
 const pageLength = 60
 
-const slugify = string => {
-  const a =
-    "àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;"
-  const b =
-    "aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------"
-  const p = new RegExp(a.split("").join("|"), "g")
-
-  return string
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-    .replace(/&/g, "-and-") // Replace & with 'and'
-    .replace(/[^\w\-]+/g, "") // Remove all non-word characters
-    .replace(/\-\-+/g, "-") // Replace multiple - with single -
-    .replace(/^-+/, "") // Trim - from start of text
-    .replace(/-+$/, "") // Trim - from end of text
-}
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const tartanTemplate = path.resolve(`./src/templates/tartan.js`)
   const letters = "abcdefghijklmnopqrstuvwxyz".split("")
 
+  const paginateNodes = (array, pageLength) => {
+    const result = Array()
+    for (let i = 0; i < Math.ceil(array.length / pageLength); i++) {
+      result.push(array.slice(i * pageLength, (i + 1) * pageLength))
+    }
+    return result
+  }
+
   let prevLetterLast = 1
   for (var i = 0; i < letters.length; i++) {
     const el = letters[i]
-    const allResults = await graphql(`
+    const allTartansByLetter = await graphql(`
       query {
         allTartansCsv(filter: {Name: {regex: "/^${el}/i"}}) {
           nodes {
@@ -46,29 +37,36 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `)
 
-    if (allResults.errors) {
-      throw allResults.errors
+    if (allTartansByLetter.errors) {
+      throw allTartansByLetter.errors
     }
-    const nodes = allResults.data.allTartansCsv.nodes
-    createPaginatedPages({
-      nodes,
-      createPage: createPage,
-      pageTemplate: "src/templates/tartans.js",
-      pageLength: pageLength,
-      pathPrefix: `tartans/${el}`,
-      context: {
-        letter: el,
-        previousletter: i > 0 ? letters[i - 1] : "",
-        previousletterlast: prevLetterLast,
-        nextletter: i < letters.length - 1 ? letters[i + 1] : "",
-      },
+    const nodes = allTartansByLetter.data.allTartansCsv.nodes
+    const totalCountByLetter = allTartansByLetter.data.allTartansCsv.totalCount
+    const paginatedNodes = paginateNodes(nodes, pageLength)
+
+    paginatedNodes.forEach((group, index, groups) => {
+      const pathPrefix = `tartans/${el}`
+      return createPage({
+        path: index > 0 ? `${pathPrefix}/${index + 1}` : `/${pathPrefix}`,
+        component: path.resolve("src/templates/tartans.js"),
+        context: {
+          group,
+          pathPrefix,
+          first: index === 0,
+          last: index === groups.length - 1,
+          index: index + 1,
+          pageCount: groups.length,
+          letter: el,
+          previousletter: i > 0 ? letters[i - 1] : "",
+          previousletterlast: prevLetterLast,
+          nextletter: i < letters.length - 1 ? letters[i + 1] : "",
+        },
+      })
     })
-    prevLetterLast = Math.ceil(
-      allResults.data.allTartansCsv.totalCount / pageLength
-    )
+    prevLetterLast = Math.ceil(totalCountByLetter / pageLength)
   }
 
-  const allResultsAtOnce = await graphql(`
+  const allTartansAtOnce = await graphql(`
     query {
       allTartansCsv {
         edges {
@@ -101,12 +99,12 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  if (allResultsAtOnce.errors) {
-    throw allResultsAtOnce.errors
+  if (allTartansAtOnce.errors) {
+    throw allTartansAtOnce.errors
   }
 
-  const tartansAtOnce = allResultsAtOnce.data.allTartansCsv.edges
-  tartansAtOnce.forEach(({ node, next, previous }) => {
+  const allTartans = allTartansAtOnce.data.allTartansCsv.edges
+  allTartans.forEach(({ node, next, previous }) => {
     createPage({
       path: `/tartan/${node.fields.slug}`,
       component: tartanTemplate,
@@ -122,29 +120,30 @@ exports.createPages = async ({ graphql, actions }) => {
 
 let slugs = []
 let i = 1
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `TartansCsv`) {
-    let value = slugify(node.Name)
-    let nameValue = node.Name
-    if (slugs.indexOf(value) !== -1) {
-      value += `-${i}`
-      nameValue += ` ${i}`
+    let slug = slugify(node.Name)
+    let uniqueName = node.Name
+    if (slugs.indexOf(slug) !== -1) {
+      slug += `-${i}`
+      uniqueName += ` ${i}`
       i++
     } else {
       i = 1
     }
 
-    slugs.push(value)
+    slugs.push(slug)
+
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
     })
     createNodeField({
       name: `Unique_Name`,
       node,
-      value: nameValue,
+      value: uniqueName,
     })
   }
 }
