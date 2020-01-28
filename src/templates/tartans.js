@@ -6,6 +6,8 @@ import MyLink from "../components/mylink"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
+const letters = "abcdefghijklmnopqrstuvwxyz".split("")
+
 const PaletteEl = ({ colors, id }) => {
   const colorsArray = colors.split(" ").map(el => {
     return `#${el.split("#")[1]}`
@@ -31,20 +33,26 @@ const TartansListing = ({ pageContext }) => {
     pathPrefix,
     pageCount,
     letter,
-    previousletter,
-    nextletter,
-    previousletterlast,
+    previousLetterLastIndex,
   } = pageContext
-  const previousUrl = first
-    ? previousletterlast === 1
-      ? `/tartans/${previousletter}`
-      : `/tartans/${previousletter}/${previousletterlast}`
-    : index - 1 === 1
-    ? `/${pathPrefix}`
-    : `/${pathPrefix}/${(index - 1).toString()}`
+
+  const letterIndex = letters.indexOf(letter)
+  const previousLetter = letterIndex > 0 ? letters[letterIndex - 1] : ""
+  const nextLetter =
+    letterIndex < letters.length - 1 ? letters[letterIndex + 1] : ""
+
+  const previousUrl =
+    index === 0
+      ? previousLetterLastIndex === 1
+        ? `/tartans/${previousLetter}`
+        : `/tartans/${previousLetter}/${previousLetterLastIndex}`
+      : index === 1
+      ? `/${pathPrefix}`
+      : `/${pathPrefix}/${index.toString()}`
+
   const nextUrl = last
-    ? `/tartans/${nextletter}`
-    : `/${pathPrefix}/${(index + 1).toString()}`
+    ? `/tartans/${nextLetter}`
+    : `/${pathPrefix}/${(index + 2).toString()}`
 
   const dataBg = useStaticQuery(graphql`
     {
@@ -62,20 +70,21 @@ const TartansListing = ({ pageContext }) => {
   return (
     <Layout>
       <SEO
-        description={`All Tartans starting by letter ${letter.toUpperCase()} - page ${index} / ${pageCount}`}
-        title={`${letter.toUpperCase()} - page ${index}`}
+        description={`All Tartans starting by letter ${letter.toUpperCase()} - page ${index +
+          1} / ${pageCount}`}
+        title={`${letter.toUpperCase()} - page ${index + 1}`}
       ></SEO>
       <SvgBg className={`tartans-bg`} svg={svg} />
       <nav className="nav-top nav">
         <div className="previousLink">
-          {(!first || previousletter) && (
+          {(!first || previousLetter) && (
             <MyLink to={previousUrl} aria-label="Go to Previous Page">
               <span className="icon">&lsaquo;</span>
             </MyLink>
           )}
         </div>
         <div className="nextLink">
-          {(!last || nextletter) && (
+          {(!last || nextLetter) && (
             <MyLink to={nextUrl} aria-label="Go to Next Page ">
               <span className="icon">&rsaquo;</span>
             </MyLink>
@@ -88,7 +97,7 @@ const TartansListing = ({ pageContext }) => {
             <span className="title-font listing">A-Z Index</span>
             <span className="title-font letter">{letter.toUpperCase()}</span>
             <small>
-              {index} / {pageCount}
+              {index + 1} / {pageCount}
             </small>
             <span className="discrete">
               <span className="ellipsis">{group[0].Name}</span>-
@@ -120,14 +129,14 @@ const TartansListing = ({ pageContext }) => {
         {group.length > 30 && (
           <nav className="hide-plus nav">
             <div className="previousLink">
-              {(!first || previousletter) && (
+              {(!first || previousLetter) && (
                 <MyLink to={previousUrl} aria-label="Go to Previous Page">
                   <span className="icon">&lsaquo;</span>
                 </MyLink>
               )}
             </div>
             <div className="nextLink">
-              {(!last || nextletter) && (
+              {(!last || nextLetter) && (
                 <MyLink to={nextUrl} aria-label="Go to Next Page ">
                   <span className="icon">&rsaquo;</span>
                 </MyLink>

@@ -17,7 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
     return result
   }
 
-  let prevLetterLast = 1
+  let previousLetterLastIndex = 1
   for (var i = 0; i < letters.length; i++) {
     const el = letters[i]
     const allTartansByLetter = await graphql(`
@@ -52,18 +52,15 @@ exports.createPages = async ({ graphql, actions }) => {
         context: {
           group,
           pathPrefix,
-          first: index === 0,
+          index,
           last: index === groups.length - 1,
-          index: index + 1,
           pageCount: groups.length,
           letter: el,
-          previousletter: i > 0 ? letters[i - 1] : "",
-          previousletterlast: prevLetterLast,
-          nextletter: i < letters.length - 1 ? letters[i + 1] : "",
+          previousLetterLastIndex,
         },
       })
     })
-    prevLetterLast = Math.ceil(totalCountByLetter / pageLength)
+    previousLetterLastIndex = Math.ceil(totalCountByLetter / pageLength)
   }
 
   const allTartansAtOnce = await graphql(`
