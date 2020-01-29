@@ -30,7 +30,6 @@ const TartansListing = ({ pageContext }) => {
     index,
     first,
     last,
-    pathPrefix,
     pageCount,
     letter,
     previousLetterLastIndex,
@@ -47,12 +46,12 @@ const TartansListing = ({ pageContext }) => {
         ? `/tartans/${previousLetter}`
         : `/tartans/${previousLetter}/${previousLetterLastIndex}`
       : index === 1
-      ? `/${pathPrefix}`
-      : `/${pathPrefix}/${index.toString()}`
+      ? `/tartans/${letter}`
+      : `/tartans/${letter}/${index.toString()}`
 
   const nextUrl = last
     ? `/tartans/${nextLetter}`
-    : `/${pathPrefix}/${(index + 2).toString()}`
+    : `/tartans/${letter}/${(index + 2).toString()}`
 
   const dataBg = useStaticQuery(graphql`
     {

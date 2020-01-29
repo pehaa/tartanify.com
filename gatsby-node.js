@@ -1,28 +1,27 @@
 const path = require(`path`)
 const slugify = require("./src/utils/slugify")
-
+const tartanTemplate = path.resolve(`./src/templates/tartan.js`)
+const tartansTemplate = path.resolve(`./src/templates/tartans.js`)
+const letters = "abcdefghijklmnopqrstuvwxyz".split("")
 const pageLength = 60
+
+const paginateNodes = (array, pageLength) => {
+  const result = Array()
+  for (let i = 0; i < Math.ceil(array.length / pageLength); i++) {
+    result.push(array.slice(i * pageLength, (i + 1) * pageLength))
+  }
+  return result
+}
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const tartanTemplate = path.resolve(`./src/templates/tartan.js`)
-  const letters = "abcdefghijklmnopqrstuvwxyz".split("")
-
-  const paginateNodes = (array, pageLength) => {
-    const result = Array()
-    for (let i = 0; i < Math.ceil(array.length / pageLength); i++) {
-      result.push(array.slice(i * pageLength, (i + 1) * pageLength))
-    }
-    return result
-  }
-
   let previousLetterLastIndex = 1
   for (var i = 0; i < letters.length; i++) {
-    const el = letters[i]
+    const letter = letters[i]
     const allTartansByLetter = await graphql(`
       query {
-        allTartansCsv(filter: {Name: {regex: "/^${el}/i"}}) {
+        allTartansCsv(filter: {Name: {regex: "/^${letter}/i"}}) {
           nodes {
             Name
             id
@@ -45,17 +44,16 @@ exports.createPages = async ({ graphql, actions }) => {
     const paginatedNodes = paginateNodes(nodes, pageLength)
 
     paginatedNodes.forEach((group, index, groups) => {
-      const pathPrefix = `tartans/${el}`
       return createPage({
-        path: index > 0 ? `${pathPrefix}/${index + 1}` : `/${pathPrefix}`,
-        component: path.resolve("src/templates/tartans.js"),
+        path:
+          index > 0 ? `/tartans/${letter}/${index + 1}` : `/tartans/${letter}`,
+        component: tartansTemplate,
         context: {
           group,
-          pathPrefix,
           index,
           last: index === groups.length - 1,
           pageCount: groups.length,
-          letter: el,
+          letter,
           previousLetterLastIndex,
         },
       })
@@ -115,8 +113,9 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
+// we will store slugs here and use this array to check if a new one already exists
 let slugs = []
-let i = 1
+// we add numbers create unique slugs and names
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `TartansCsv`) {
