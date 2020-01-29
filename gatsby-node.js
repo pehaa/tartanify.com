@@ -15,16 +15,56 @@ const paginateNodes = (array, pageLength) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
+  const allTartans = await graphql(`
+    query {
+      allTartansCsv {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+          }
+          previous {
+            fields {
+              slug
+              Unique_Name
+            }
+          }
+          next {
+            fields {
+              slug
+              Unique_Name
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (allTartans.errors) {
+    throw allTartans.errors
+  }
+
+  allTartans.data.allTartansCsv.edges.forEach(({ node, next, previous }) => {
+    createPage({
+      path: `/tartan/${node.fields.slug}`,
+      component: tartanTemplate,
+      context: {
+        id: node.id,
+        slug: node.fields.slug,
+        previous,
+        next,
+      },
+    })
+  })
 
   let previousLetterLastIndex = 1
-  for (var i = 0; i < letters.length; i++) {
-    const letter = letters[i]
+  for (const letter of letters) {
     const allTartansByLetter = await graphql(`
       query {
         allTartansCsv(filter: {Name: {regex: "/^${letter}/i"}}) {
           nodes {
-            Name
-            id
             Palette
             fields {
               slug
@@ -60,57 +100,6 @@ exports.createPages = async ({ graphql, actions }) => {
     })
     previousLetterLastIndex = Math.ceil(totalCountByLetter / pageLength)
   }
-
-  const allTartansAtOnce = await graphql(`
-    query {
-      allTartansCsv {
-        edges {
-          node {
-            Name
-            id
-            Palette
-            Threadcount
-            Origin_URL
-            fields {
-              slug
-              Unique_Name
-            }
-          }
-          previous {
-            fields {
-              slug
-              Unique_Name
-            }
-          }
-          next {
-            fields {
-              slug
-              Unique_Name
-            }
-          }
-        }
-        totalCount
-      }
-    }
-  `)
-
-  if (allTartansAtOnce.errors) {
-    throw allTartansAtOnce.errors
-  }
-
-  const allTartans = allTartansAtOnce.data.allTartansCsv.edges
-  allTartans.forEach(({ node, next, previous }) => {
-    createPage({
-      path: `/tartan/${node.fields.slug}`,
-      component: tartanTemplate,
-      context: {
-        id: node.id,
-        slug: node.fields.slug,
-        previous,
-        next,
-      },
-    })
-  })
 }
 
 // we will store slugs here and use this array to check if a new one already exists

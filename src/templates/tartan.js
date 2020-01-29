@@ -12,7 +12,6 @@ import SEO from "../components/seo"
 export const query = graphql`
   query($id: String!) {
     tartansCsv(id: { eq: $id }) {
-      Name
       Palette
       Threadcount
       Origin_URL
