@@ -1,6 +1,6 @@
 import React from "react"
 import logo from "../assets/logo-header.svg"
-import MyLink from "./mylink.js"
+import MyLink from "./mylink"
 const Header = () => {
   return (
     <>

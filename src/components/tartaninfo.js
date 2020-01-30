@@ -1,6 +1,6 @@
 import React from "react"
-import Info from "./info.js"
-import TartanNavigation from "./tartannavigation.js"
+import Info from "./info"
+import TartanNavigation from "./tartannavigation"
 
 const TartanInfo = ({ previous, next, name, originURL, transitionStatus }) => {
   return (

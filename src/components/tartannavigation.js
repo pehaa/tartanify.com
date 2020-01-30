@@ -1,6 +1,6 @@
 import React from "react"
-import MyLink from "./mylink.js"
-import Info from "./info.js"
+import MyLink from "./mylink"
+import Info from "./info"
 
 const TartanNavigation = ({ previous, next, originURL }) => {
   return (

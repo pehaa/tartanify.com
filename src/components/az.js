@@ -1,6 +1,6 @@
 import React from "react"
 import usePagesAZOrder from "../hooks/usepagesAZOrder"
-import MyLink from "./mylink.js"
+import MyLink from "./mylink"
 
 const AZ = () => {
   const nodes = usePagesAZOrder()

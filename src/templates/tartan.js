@@ -1,12 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout.js"
-import SvgTile from "../components/svgtile.js"
-import SvgBg from "../components/svgbg.js"
-import TartanInfo from "../components/tartaninfo.js"
+import Layout from "../components/layout"
+import SvgTile from "../components/svgtile"
+import SvgBg from "../components/svgbg"
+import TartanInfo from "../components/tartaninfo"
 import svgAsString from "../components/svgasstring"
-import SvgDownloadLink from "../components/tartandownloadsvg.js"
-import PngDownloadLink from "../components/tartandownloadpng.js"
+import SvgDownloadLink from "../components/tartandownloadsvg"
+import PngDownloadLink from "../components/tartandownloadpng"
 
 import SEO from "../components/seo"
 
