@@ -7,7 +7,6 @@ const DownLoadAsPng = ({ svg, name }) => {
   const size = svg.props.width
   const string = svgAsString(svg)
   useEffect(() => {
-    console.log("will use effect")
     const canvas = document.createElement("canvas")
     // multiply by 2 for high-res screens
     canvas.width = 2 * size
