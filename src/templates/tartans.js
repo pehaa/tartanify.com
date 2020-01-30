@@ -1,29 +1,14 @@
 import React from "react"
 import Layout from "../components/layout"
-import SvgTile from "../components/svgtile.js"
-import SvgBg from "../components/svgbg.js"
+import SvgTile from "../components/svgtile"
+import SvgBg from "../components/svgbg"
 import MyLink from "../components/mylink"
+import PaletteEl from "../components/paletteel"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
 const letters = "abcdefghijklmnopqrstuvwxyz".split("")
 
-const PaletteEl = ({ colors, id }) => {
-  const colorsArray = colors.split(" ").map(el => {
-    return `#${el.split("#")[1]}`
-  })
-  return (
-    <ul className="colors">
-      {colorsArray.map((el, index) => (
-        <li
-          key={`${id}-${index}`}
-          className="color"
-          style={{ background: el }}
-        ></li>
-      ))}
-    </ul>
-  )
-}
 const TartansListing = ({ pageContext }) => {
   const {
     group,
