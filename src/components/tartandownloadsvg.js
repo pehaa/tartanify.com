@@ -1,12 +1,11 @@
 import React from "react"
-import svgAsString from "./svgasstring"
 
-const DownLoadAsSvg = ({ svg, name }) => {
+const SvgDownloadLink = ({ svgData, fileName }) => {
   return (
     <a
-      download={`${name}.svg`}
+      download={`${fileName}.svg`}
       href-lang="image/svg+xml"
-      href={`data:image/svg+xml;utf8,${svgAsString(svg)}`}
+      href={`data:image/svg+xml;utf8,${svgData}`}
     >
       <span className="icon">&rsaquo;</span>{" "}
       <span className="download-text">
@@ -17,4 +16,4 @@ const DownLoadAsSvg = ({ svg, name }) => {
   )
 }
 
-export default DownLoadAsSvg
+export default SvgDownloadLink

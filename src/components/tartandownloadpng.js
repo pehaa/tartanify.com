@@ -1,11 +1,8 @@
 import React, { useRef, useEffect } from "react"
-import svgAsString from "./svgasstring"
 
-const DownLoadAsPng = ({ svg, name }) => {
+const PngDownloadLink = ({ svgData, size, fileName }) => {
   const aEl = useRef(null)
 
-  const size = svg.props.width
-  const string = svgAsString(svg)
   useEffect(() => {
     const canvas = document.createElement("canvas")
     // multiply by 2 for high-res screens
@@ -19,12 +16,12 @@ const DownLoadAsPng = ({ svg, name }) => {
       ctx.drawImage(img, 0, 0)
       aEl.current.setAttribute("href", canvas.toDataURL("image/png"))
     }
-    img.src = `data:image/svg+xml,${string}`
-  }, [string, size])
+    img.src = `data:image/svg+xml,${svgData}`
+  }, [svgData, size])
 
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a id={svg.name} ref={aEl} download={`${name}.png`} href-lang="image/png">
+    <a ref={aEl} download={`${fileName}.png`}>
       <span className="icon">&rsaquo;</span>{" "}
       <span className="download-text">
         <span className="hide-sm">Download as </span>PNG
@@ -34,4 +31,4 @@ const DownLoadAsPng = ({ svg, name }) => {
   )
 }
 
-export default DownLoadAsPng
+export default PngDownloadLink
