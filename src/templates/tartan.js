@@ -5,8 +5,8 @@ import SvgTile from "../components/svgtile"
 import SvgBg from "../components/svgbg"
 import TartanInfo from "../components/tartaninfo"
 import svgAsString from "../components/svgasstring"
-import SvgDownloadLink from "../components/tartandownloadsvg"
-import PngDownloadLink from "../components/tartandownloadpng"
+import SvgDownloadLink from "../components/svgdownloadlink"
+import PngDownloadLink from "../components/pngdownloadlink"
 
 import SEO from "../components/seo"
 
@@ -18,14 +18,16 @@ export const query = graphql`
       Origin_URL
       fields {
         Unique_Name
+        slug
       }
     }
   }
 `
 const TartanTemplate = props => {
-  const { previous, next, slug } = props.pageContext
+  const { previous, next } = props.pageContext
   const { fields, Palette, Threadcount, Origin_URL } = props.data.tartansCsv
   const name = fields.Unique_Name
+  const slug = fields.slug
   const svg = SvgTile({
     palette: Palette,
     threadcount: Threadcount,

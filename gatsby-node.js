@@ -52,7 +52,6 @@ exports.createPages = async ({ graphql, actions }) => {
       component: tartanTemplate,
       context: {
         id: node.id,
-        slug: node.fields.slug,
         previous,
         next,
       },
