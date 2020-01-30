@@ -8,7 +8,7 @@ import TartansNavigation from "../components/tartansnavigation"
 import SEO from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
-const TartansListing = ({ pageContext }) => {
+const TartansTemplate = ({ pageContext }) => {
   const {
     group,
     index,
@@ -96,4 +96,4 @@ const TartansListing = ({ pageContext }) => {
   )
 }
 
-export default TartansListing
+export default TartansTemplate
