@@ -58,7 +58,6 @@ const TartansListing = ({ pageContext }) => {
       tartansCsv(fields: { slug: { eq: "corrie" } }) {
         Palette
         Threadcount
-        Name
       }
     }
   `)
@@ -99,8 +98,10 @@ const TartansListing = ({ pageContext }) => {
               {index + 1} / {pageCount}
             </small>
             <span className="discrete">
-              <span className="ellipsis">{group[0].Name}</span>-
-              <span className="ellipsis">{group[group.length - 1].Name}</span>
+              <span className="ellipsis">{group[0].fields.Unique_Name}</span>-
+              <span className="ellipsis">
+                {group[group.length - 1].fields.Unique_Name}
+              </span>
             </span>
           </h1>
         </header>
