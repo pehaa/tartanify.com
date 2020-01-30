@@ -24,13 +24,8 @@ export const query = graphql`
 `
 const TartanTemplate = props => {
   const { previous, next, slug } = props.pageContext
-  const {
-    fields: { Unique_Name },
-    Palette,
-    Threadcount,
-    Origin_URL,
-  } = props.data.tartansCsv
-  console.log(props.data)
+  const { fields, Palette, Threadcount, Origin_URL } = props.data.tartansCsv
+  const name = fields.Unique_Name
   const svg = SvgTile({
     palette: Palette,
     threadcount: Threadcount,
@@ -38,14 +33,14 @@ const TartanTemplate = props => {
 
   const svgData = svgAsString(svg)
   const svgSize = svg.props.width
-  const description = `You can download here this beautiful seamless ${Unique_Name} tartan pattern. It's available both as an svg file or in a PNG format.`
+  const description = `You can download here this beautiful seamless ${name} tartan pattern. It's available both as an svg file or in a PNG format.`
 
   return (
     <Layout>
-      <SEO title={Unique_Name} description={description}></SEO>
+      <SEO title={name} description={description}></SEO>
       <SvgBg svg={svg} />
       <TartanInfo
-        name={Unique_Name}
+        name={name}
         previous={previous}
         next={next}
         originURL={Origin_URL}

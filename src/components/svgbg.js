@@ -1,7 +1,7 @@
 import React from "react"
 import svgAsString from "./svgasstring"
 
-const SvgBg = ({ svg, style, className }) => {
+const SvgBg = ({ svg, style, className = "" }) => {
   return (
     <div
       className={`bgtartan ${className}`}

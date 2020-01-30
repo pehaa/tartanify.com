@@ -72,7 +72,7 @@ const TartansListing = ({ pageContext }) => {
           1} / ${pageCount}`}
         title={`${letter.toUpperCase()} - page ${index + 1}`}
       ></SEO>
-      <SvgBg className={`tartans-bg`} svg={svg} />
+      <SvgBg className="tartans-bg" svg={svg} />
       <nav className="nav-top nav">
         <div className="previousLink">
           {(!first || previousLetter) && (
@@ -108,7 +108,7 @@ const TartansListing = ({ pageContext }) => {
         <ul className="index">
           {group.map(node => {
             return (
-              <li className="index-el" key={node.id}>
+              <li className="index-el" key={node.fields.slug}>
                 <MyLink to={`/tartan/${node.fields.slug}`}>
                   <span>{node.fields.Unique_Name}</span>
                   {<PaletteEl colors={node.Palette} id={node.id} />}
