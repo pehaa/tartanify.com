@@ -25,12 +25,12 @@ export const query = graphql`
 const TartanTemplate = props => {
   const { previous, next, slug } = props.pageContext
   const {
-    Unique_Name,
+    fields: { Unique_Name },
     Palette,
     Threadcount,
     Origin_URL,
   } = props.data.tartansCsv
-
+  console.log(props.data)
   const svg = SvgTile({
     palette: Palette,
     threadcount: Threadcount,
