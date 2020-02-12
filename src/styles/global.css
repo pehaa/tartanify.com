@@ -135,6 +135,7 @@ li a + svg {
 }
 .sidebar {
   position: fixed;
+  z-index: 100;
   right: 0;
   top: 0;
   bottom: 0;
@@ -336,7 +337,7 @@ footer {
   width: 240px;
   max-width: 75%;
   position: relative;
-  z-index: 1;
+  z-index: 100;
 }
 .logo {
   max-width: 100%;
@@ -528,10 +529,7 @@ footer {
     opacity: 1;
   }
 }
-.tl-wrapper-status--entering + .tl-wrapper-status--exiting .logo-link,
-.tl-wrapper-status--entering + .tl-wrapper-status--exiting .sidebar {
-  visibility: hidden;
-}
+
 .tl-wrapper-status--entering + .tl-wrapper-status--exiting * {
   box-shadow: none;
 }

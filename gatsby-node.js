@@ -131,3 +131,79 @@ exports.onCreateNode = ({ node, actions }) => {
     })
   }
 }
+const { GraphQLScalarType } = require(`gatsby/graphql`)
+const elasticlunr = require(`elasticlunr`)
+
+const SearchIndex = new GraphQLScalarType({
+  name: `MySiteSearchIndex_Index`,
+  description: `Serialized elasticlunr search index`,
+
+  parseValue() {
+    throw new Error(`Not supported`)
+  },
+
+  serialize(value) {
+    return value
+  },
+
+  parseLiteral() {
+    throw new Error(`Not supported`)
+  },
+})
+
+exports.createResolvers = ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
+  createResolvers({
+    Query: {
+      AllTartansSearchIndex: {
+        type: SearchIndex,
+        resolve(source, args, context, info) {
+          const sitePageNodes = context.nodeModel.getAllNodes({
+            type: `TartansCsv`,
+          })
+          const fieldResolvers = {
+            title: node => node.Name,
+          }
+          return createOrGetIndex(sitePageNodes, cache, fieldResolvers)
+        },
+      },
+    },
+  })
+}
+
+const createOrGetIndex = async (nodes, cache, fieldResolvers) => {
+  const cacheKey = `SitePageSearchIndex`
+  const cached = await cache.get(cacheKey)
+  if (cached) {
+    console.log("from cache")
+    return cached
+  }
+  const index = elasticlunr()
+  index.setRef(`id`)
+  const fields = Object.keys(fieldResolvers)
+  fields.forEach(field => index.addField(field))
+  console.log("not from cache")
+  for (pageNode of nodes) {
+    const doc = {
+      id: pageNode.id,
+      path: `/tartan/${pageNode.fields.slug}`,
+      ...fields.reduce((prev, key) => {
+        return {
+          ...prev,
+          [key]: fieldResolvers[key](pageNode),
+        }
+      }, {}),
+    }
+    index.addDoc(doc)
+  }
+
+  const json = index.toJSON()
+  await cache.set(cacheKey, json)
+  return json
+}

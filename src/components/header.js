@@ -1,6 +1,8 @@
 import React from "react"
+import { useStaticQuery } from "gatsby"
 import logo from "../assets/logo-header.svg"
 import MyLink from "./mylink"
+
 const Header = () => {
   return (
     <>
