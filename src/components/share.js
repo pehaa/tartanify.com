@@ -8,7 +8,7 @@ const Share = ({ className }) => {
   return (
     <a
       className={className}
-      href={`https://twitter.com/intent/tweet?text=${message}&url=https://tartanify.com&via=PeHaa`}
+      href={`https://twitter.com/intent/tweet?text=${message}&url=https://tartanify.com&via=PeHaa%20and%20@JoeVains`}
       target="_blank"
       rel="noopener noreferrer"
     >
