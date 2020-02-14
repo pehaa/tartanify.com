@@ -10,37 +10,41 @@ const TartansNavigation = ({
   last,
   previousLetterLastIndex,
 }) => {
-  const first = index === 0
-
   const letterIndex = letters.indexOf(letter)
-  const previousLetter = letterIndex > 0 ? letters[letterIndex - 1] : ""
+  const previousLetter = letterIndex > 0 ? letters[letterIndex - 1] : null
   const nextLetter =
-    letterIndex < letters.length - 1 ? letters[letterIndex + 1] : ""
+    letterIndex < letters.length - 1 ? letters[letterIndex + 1] : null
 
-  const previousUrl =
-    index === 0
-      ? previousLetterLastIndex === 1
-        ? `/tartans/${previousLetter}`
-        : `/tartans/${previousLetter}/${previousLetterLastIndex}`
-      : index === 1
-      ? `/tartans/${letter}`
-      : `/tartans/${letter}/${index}`
+  let previousUrl = null,
+    nextUrl = null
 
-  const nextUrl = last
-    ? `/tartans/${nextLetter}`
-    : `/tartans/${letter}/${(index + 2).toString()}`
+  if (index === 0 && previousLetter) {
+    const linkFragment =
+      previousLetterLastIndex === 1 ? "" : `/${previousLetterLastIndex}`
+    previousUrl = `/tartans/${previousLetter}${linkFragment}`
+  } else if (index === 1) {
+    previousUrl = `/tartans/${letter}`
+  } else if (index > 1) {
+    previousUrl = `/tartans/${letter}/${index}`
+  }
+
+  if (last && nextLetter) {
+    nextUrl = `/tartans/${nextLetter}`
+  } else if (!last) {
+    nextUrl = `/tartans/${letter}/${(index + 2).toString()}`
+  }
 
   return (
     <nav className={`nav ${className}`}>
       <div className="previousLink">
-        {(!first || previousLetter) && (
+        {previousUrl && (
           <MyLink to={previousUrl} aria-label="Go to Previous Page">
             <span className="icon">&lsaquo;</span>
           </MyLink>
         )}
       </div>
       <div className="nextLink">
-        {(!last || nextLetter) && (
+        {nextUrl && (
           <MyLink to={nextUrl} aria-label="Go to Next Page ">
             <span className="icon">&rsaquo;</span>
           </MyLink>

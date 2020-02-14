@@ -2,7 +2,7 @@
   "name": "tartanify.com",
   "private": true,
   "description": "Tartans from csv file with gatsby",
-  "version": "0.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",

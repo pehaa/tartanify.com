@@ -1,4 +1,5 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SvgTile from "../components/svgtile"
 import SvgBg from "../components/svgbg"
@@ -6,7 +7,6 @@ import MyLink from "../components/mylink"
 import PaletteEl from "../components/paletteel"
 import TartansNavigation from "../components/tartansnavigation"
 import SEO from "../components/seo"
-import { useStaticQuery, graphql } from "gatsby"
 
 const TartansTemplate = ({ pageContext }) => {
   const {
