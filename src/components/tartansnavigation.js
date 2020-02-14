@@ -52,21 +52,6 @@ const TartansNavigation = ({
       </div>
     </nav>
   )
-
-  return (
-    <nav className={`nav ${className}`}>
-      {previousUrl && (
-        <Link to={previousUrl} aria-label="Go to Previous Page">
-          &lsaquo;
-        </Link>
-      )}
-      {nextUrl && (
-        <Link to={nextUrl} aria-label="Go to Next Page">
-          &rsaquo;
-        </Link>
-      )}
-    </nav>
-  )
 }
 
 export default TartansNavigation
