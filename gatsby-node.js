@@ -83,7 +83,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const paginatedNodes = paginateNodes(nodes, pageLength)
 
     paginatedNodes.forEach((group, index, groups) => {
-      return createPage({
+      createPage({
         path:
           index > 0 ? `/tartans/${letter}/${index + 1}` : `/tartans/${letter}`,
         component: tartansTemplate,
