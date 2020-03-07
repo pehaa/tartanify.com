@@ -32,7 +32,7 @@ export default () => {
             A 5k+ Collection of{" "}
             <span className="title-font letter">Tartan Patterns</span>
           </h1>
-          <p>We've gathered for you over 5000 tartan patters. </p>
+          <p>We've gathered for you over 5000 tartan patterns. </p>
           <p>
             All ready to download and use as repeating tiles in SVG and PNG
             format.
