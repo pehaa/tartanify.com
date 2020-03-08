@@ -16,22 +16,18 @@ const Search = () => {
   const handleChange = e => {
     const query = e.target.value
     setValue(query)
-    if (query[query.length - 1] === "+" || query[query.length - 1] === "-") {
-      return
-    }
     try {
-      const search = index.search(query).map(({ ref }) => {
-        return {
-          path: ref,
-          ...store[ref],
-        }
-      })
+      const search = query
+        ? index.search(query).map(({ ref }) => {
+            return {
+              path: ref,
+              ...store[ref],
+            }
+          })
+        : []
       setResults(search)
     } catch (error) {
       console.log(error)
-    }
-    if (!query) {
-      setResults([])
     }
   }
 
