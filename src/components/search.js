@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react"
-import { Index } from "lunr"
+import lunr, { Index } from "lunr"
 import { Link, graphql, useStaticQuery } from "gatsby"
 const SEARCH_QUERY = graphql`
   query SearchIndexQuery {
@@ -13,19 +13,41 @@ const Search = () => {
   const { AllSearchIndexLunr } = useStaticQuery(SEARCH_QUERY)
   const index = Index.load(AllSearchIndexLunr.index)
   const { store } = AllSearchIndexLunr
+
   const handleChange = e => {
     const query = e.target.value
     setValue(query)
+    const keywords = query.trim().split(/\s+/)
+    console.log(
+      keywords,
+      keywords.filter(el => el.length > 2)
+    )
+
     try {
-      const search = query
-        ? index.search(query).map(({ ref }) => {
+      /* const search = keywords.some(el => el.length < 2)
+        ? []
+        : index.search(query).map(({ ref }) => {
             return {
               path: ref,
               ...store[ref],
             }
           })
-        : []
-      setResults(search)
+ */
+      const resultsNew = keywords.some(el => el.length < 2)
+        ? []
+        : index
+            .query(function(query) {
+              keywords.forEach(el => {
+                query.term(el, { presence: lunr.Query.presence.REQUIRED })
+              })
+            })
+            .map(({ ref }) => {
+              return {
+                path: ref,
+                ...store[ref],
+              }
+            })
+      setResults(resultsNew)
     } catch (error) {
       console.log(error)
     }
