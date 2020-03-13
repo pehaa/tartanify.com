@@ -5,6 +5,9 @@ const tartansTemplate = path.resolve(`./src/templates/tartans.js`)
 const letters = "abcdefghijklmnopqrstuvwxyz".split("")
 const pageLength = 60
 
+const { GraphQLScalarType } = require(`gatsby/graphql`)
+const lunr = require(`lunr`)
+
 const paginateNodes = (array, pageLength) => {
   const result = Array()
   for (let i = 0; i < Math.ceil(array.length / pageLength); i++) {
@@ -83,7 +86,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const paginatedNodes = paginateNodes(nodes, pageLength)
 
     paginatedNodes.forEach((group, index, groups) => {
-      return createPage({
+      createPage({
         path:
           index > 0 ? `/tartans/${letter}/${index + 1}` : `/tartans/${letter}`,
         component: tartansTemplate,
@@ -130,4 +133,74 @@ exports.onCreateNode = ({ node, actions }) => {
       value: uniqueName,
     })
   }
+}
+
+const SearchIndex = new GraphQLScalarType({
+  name: `MySiteSearchIndex_Index`,
+  description: `Serialized elasticlunr search index`,
+
+  parseValue() {
+    throw new Error(`Not supported`)
+  },
+
+  serialize(value) {
+    return value
+  },
+
+  parseLiteral() {
+    throw new Error(`Not supported`)
+  },
+})
+
+exports.createResolvers = ({ cache, createResolvers }) => {
+  createResolvers({
+    Query: {
+      AllSearchIndexLunr: {
+        type: SearchIndex,
+        resolve(source, args, context) {
+          const siteNodes = context.nodeModel.getAllNodes({
+            type: `TartansCsv`,
+          })
+          const fieldResolvers = {
+            title: node => node.fields.Unique_Name,
+          }
+          return createOrGetIndexLunr(siteNodes, fieldResolvers, cache)
+        },
+      },
+    },
+  })
+}
+
+const createOrGetIndexLunr = async (nodes, fieldResolvers, cache) => {
+  const cacheKey = `SiteSearchIndexLunr`
+  const cached = await cache.get(cacheKey)
+  if (cached) {
+    console.log("from cache")
+    return cached
+  }
+  const store = {}
+  const index = lunr(function() {
+    const fields = Object.keys(fieldResolvers)
+    fields.forEach(field => this.field(field))
+    this.ref("path")
+    for (node of nodes) {
+      const doc = {
+        path: `${node.fields.slug}`,
+        ...fields.reduce((prev, key) => {
+          return {
+            ...prev,
+            [key]: fieldResolvers[key](node),
+          }
+        }, {}),
+      }
+      store[doc.path] = {
+        title: doc.title,
+      }
+      this.add(doc)
+    }
+  })
+
+  const json = { index: index.toJSON(), store }
+  cache.set(cacheKey, json)
+  return json
 }
