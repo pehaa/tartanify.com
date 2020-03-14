@@ -3,8 +3,8 @@ import Search from "./search"
 
 const SearchWrapper = ({ children }) => (
   <>
-    <Search />
     {children}
+    <Search />
   </>
 )
 
