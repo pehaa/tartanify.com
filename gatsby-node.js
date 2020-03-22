@@ -4,8 +4,7 @@ const tartanTemplate = path.resolve(`./src/templates/tartan.js`)
 const tartansTemplate = path.resolve(`./src/templates/tartans.js`)
 const letters = "abcdefghijklmnopqrstuvwxyz".split("")
 const pageLength = 60
-
-const { GraphQLScalarType } = require(`gatsby/graphql`)
+const { GraphQLJSONObject } = require("graphql-type-json")
 const lunr = require(`lunr`)
 
 const paginateNodes = (array, pageLength) => {
@@ -135,65 +134,39 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 }
 
-const SearchIndex = new GraphQLScalarType({
-  name: `MySiteSearchIndex_Index`,
-  description: `Serialized elasticlunr search index`,
-
-  parseValue() {
-    throw new Error(`Not supported`)
-  },
-
-  serialize(value) {
-    return value
-  },
-
-  parseLiteral() {
-    throw new Error(`Not supported`)
-  },
-})
-
 exports.createResolvers = ({ cache, createResolvers }) => {
   createResolvers({
     Query: {
       AllSearchIndexLunr: {
-        type: SearchIndex,
+        type: GraphQLJSONObject,
         resolve(source, args, context) {
           const siteNodes = context.nodeModel.getAllNodes({
             type: `TartansCsv`,
           })
-          const fieldResolvers = {
-            title: node => node.fields.Unique_Name,
-          }
-          return createOrGetIndexLunr(siteNodes, fieldResolvers, cache)
+          return createIndex(siteNodes, cache)
         },
       },
     },
   })
 }
 
-const createOrGetIndexLunr = async (nodes, fieldResolvers, cache) => {
+const createIndex = async (nodes, cache) => {
   const cacheKey = `SiteSearchIndexLunr`
   const cached = await cache.get(cacheKey)
   if (cached) {
-    console.log("from cache")
     return cached
   }
   const store = {}
   const index = lunr(function() {
-    const fields = Object.keys(fieldResolvers)
-    fields.forEach(field => this.field(field))
-    this.ref("path")
+    this.ref(`slug`)
+    this.field(`title`)
     for (node of nodes) {
+      const { slug } = node.fields
       const doc = {
-        path: `${node.fields.slug}`,
-        ...fields.reduce((prev, key) => {
-          return {
-            ...prev,
-            [key]: fieldResolvers[key](node),
-          }
-        }, {}),
+        slug,
+        title: node.fields.Unique_Name,
       }
-      store[doc.path] = {
+      store[slug] = {
         title: doc.title,
       }
       this.add(doc)
