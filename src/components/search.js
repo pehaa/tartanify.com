@@ -16,19 +16,27 @@ const Search = () => {
   const { AllSearchIndexLunr } = useStaticQuery(SEARCH_QUERY)
   const index = Index.load(AllSearchIndexLunr.index)
   const { store } = AllSearchIndexLunr
+
   const handleChange = e => {
     const query = e.target.value || ""
     setValue(query)
+    if (!query.length) {
+      setResults([])
+    }
     const keywords = query
-      .replace(/\*/g, "")
       .trim()
+      .replace(/\*/g, "")
       .toLowerCase()
       .split(/\s+/)
 
     try {
       let search = []
-      if (!keywords.some(el => el.length < 2)) {
-        keywords.forEach((el, i) => {
+      if (keywords[keywords.length - 1].length < 2) {
+        return
+      }
+      keywords
+        .filter(el => el.length > 1)
+        .forEach((el, i) => {
           const elSearch = index
             .query(function(query) {
               query.term(el, { editDistance: el.length > 5 ? 1 : 0 })
@@ -45,16 +53,15 @@ const Search = () => {
             })
             .map(({ ref }) => {
               return {
-                path: ref,
+                slug: ref,
                 ...store[ref],
               }
             })
           search =
             i > 0
-              ? search.filter(x => elSearch.some(el => el.path === x.path))
+              ? search.filter(x => elSearch.some(el => el.slug === x.slug))
               : elSearch
         })
-      }
       setResults(search)
     } catch (error) {
       console.log(error)
@@ -88,7 +95,7 @@ const Search = () => {
           </button>
         )}
       </div>
-      {!!value && (
+      {value.trim().length > 1 && (
         <div className="search-results">
           <h2>
             {!!results.length && (
@@ -101,8 +108,8 @@ const Search = () => {
           </h2>
           <ul>
             {results.map(result => (
-              <li key={result.path}>
-                <Link to={`/tartan/${result.path}`}>{result.title}</Link>
+              <li key={result.slug}>
+                <Link to={`/tartan/${result.slug}`}>{result.title}</Link>
               </li>
             ))}
           </ul>
