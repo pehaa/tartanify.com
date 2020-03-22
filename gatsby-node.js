@@ -137,7 +137,7 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.createResolvers = ({ cache, createResolvers }) => {
   createResolvers({
     Query: {
-      AllSearchIndexLunr: {
+      LunrIndex: {
         type: GraphQLJSONObject,
         resolve(source, args, context) {
           const siteNodes = context.nodeModel.getAllNodes({
@@ -151,7 +151,7 @@ exports.createResolvers = ({ cache, createResolvers }) => {
 }
 
 const createIndex = async (nodes, cache) => {
-  const cacheKey = `SiteSearchIndexLunr`
+  const cacheKey = `LunrIndex`
   const cached = await cache.get(cacheKey)
   if (cached) {
     return cached

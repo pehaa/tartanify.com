@@ -1,21 +1,22 @@
 import React, { useState, useRef } from "react"
 import lunr, { Index } from "lunr"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
+import SearchResults from "./searchresults"
 import iconClose from "../assets/icons-close.svg"
 import iconSearch from "../assets/icons-search.svg"
 
 const SEARCH_QUERY = graphql`
   query SearchIndexQuery {
-    AllSearchIndexLunr
+    LunrIndex
   }
 `
 const Search = () => {
   const inputEl = useRef(null)
   const [value, setValue] = useState("")
   const [results, setResults] = useState([])
-  const { AllSearchIndexLunr } = useStaticQuery(SEARCH_QUERY)
-  const index = Index.load(AllSearchIndexLunr.index)
-  const { store } = AllSearchIndexLunr
+  const { LunrIndex } = useStaticQuery(SEARCH_QUERY)
+  const index = Index.load(LunrIndex.index)
+  const { store } = LunrIndex
 
   const handleChange = e => {
     const query = e.target.value || ""
@@ -95,26 +96,7 @@ const Search = () => {
           </button>
         )}
       </div>
-      {value.trim().length > 1 && (
-        <div className="search-results">
-          <h2>
-            {!!results.length && (
-              <>
-                {results.length} tartan{results.length === 1 ? "" : `s`} matched
-                your query
-              </>
-            )}
-            {!results.length && <>Sorry, no matches found.</>}
-          </h2>
-          <ul>
-            {results.map(result => (
-              <li key={result.slug}>
-                <Link to={`/tartan/${result.slug}`}>{result.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {value.trim().length > 1 && <SearchResults results={results} />}
     </div>
   )
 }
