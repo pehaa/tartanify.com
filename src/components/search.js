@@ -45,12 +45,6 @@ const Search = () => {
                 wildcard:
                   lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
               })
-              query.term(el, {
-                wildcard: lunr.Query.wildcard.LEADING,
-              })
-              query.term(el, {
-                wildcard: lunr.Query.wildcard.TRAILING,
-              })
             })
             .map(({ ref }) => {
               return {
