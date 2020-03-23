@@ -30,11 +30,11 @@ const Search = () => {
       .toLowerCase()
       .split(/\s+/)
 
+    if (keywords[keywords.length - 1].length < 2) {
+      return
+    }
     try {
       let search = []
-      if (keywords[keywords.length - 1].length < 2) {
-        return
-      }
       keywords
         .filter(el => el.length > 1)
         .forEach((el, i) => {
