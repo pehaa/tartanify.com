@@ -559,7 +559,8 @@ footer {
   overflow: auto;
   max-height: calc(100vh - 10rem);
 }
-.search-wrapper h2 {
+.search-wrapper h2,
+.search-wrapper p {
   font-size: 1rem;
   margin-bottom: 0;
 }
@@ -644,4 +645,16 @@ footer {
     padding-right: 0;
     width: 0;
   }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
 }

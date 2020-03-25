@@ -10,7 +10,7 @@ const SEARCH_QUERY = graphql`
     LunrIndex
   }
 `
-const Search = () => {
+const SearchWidget = () => {
   const inputEl = useRef(null)
   const [value, setValue] = useState("")
   const [results, setResults] = useState([])
@@ -67,7 +67,11 @@ const Search = () => {
     <div className="search-wrapper">
       <div role="search">
         <img src={iconSearch} width="16" height="16" alt="" />
+        <label for="search-input" className="visually-hidden">
+          Search Tartans by Name
+        </label>
         <input
+          id="search-input"
           className={
             value.length ? "search-input" : "search-input mobile-minified"
           }
@@ -94,4 +98,4 @@ const Search = () => {
     </div>
   )
 }
-export default Search
+export default SearchWidget
