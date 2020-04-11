@@ -34,14 +34,14 @@ const SearchWidget = () => {
       return
     }
     try {
-      let search = []
+      let andSearch = []
       keywords
         .filter(el => el.length > 1)
         .forEach((el, i) => {
-          const elSearch = index
-            .query(function(query) {
-              query.term(el, { editDistance: el.length > 5 ? 1 : 0 })
-              query.term(el, {
+          const termSearch = index
+            .query(function(q) {
+              q.term(el, { editDistance: el.length > 5 ? 1 : 0 })
+              q.term(el, {
                 wildcard:
                   lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
               })
@@ -52,12 +52,12 @@ const SearchWidget = () => {
                 ...store[ref],
               }
             })
-          search =
+          andSearch =
             i > 0
-              ? search.filter(x => elSearch.some(el => el.slug === x.slug))
-              : elSearch
+              ? andSearch.filter(x => termSearch.some(el => el.slug === x.slug))
+              : termSearch
         })
-      setResults(search)
+      setResults(andSearch)
     } catch (error) {
       console.log(error)
     }
@@ -67,7 +67,7 @@ const SearchWidget = () => {
     <div className="search-wrapper">
       <div role="search">
         <img src={iconSearch} width="16" height="16" alt="" />
-        <label for="search-input" className="visually-hidden">
+        <label htmlFor="search-input" className="visually-hidden">
           Search Tartans by Name
         </label>
         <input
