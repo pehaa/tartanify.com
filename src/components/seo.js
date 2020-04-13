@@ -1,5 +1,5 @@
 import React from "react"
-import Helmet from "react-helmet"
+import { Helmet } from "react-helmet"
 import useSiteMetadata from "../hooks/usesitemetadata"
 import favicon16 from "../assets/favicon-16x16.png"
 import favicon32 from "../assets/favicon-32x32.png"
