@@ -38,9 +38,12 @@ const SearchWidget = () => {
       keywords
         .filter(el => el.length > 1)
         .forEach((el, i) => {
-          const termSearch = index
+          // per-single-keyword results
+          const keywordSearch = index
             .query(function(q) {
-              q.term(el, { editDistance: el.length > 5 ? 1 : 0 })
+              q.term(el, {
+                editDistance: el.length > 5 ? 1 : 0,
+              })
               q.term(el, {
                 wildcard:
                   lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
@@ -54,8 +57,10 @@ const SearchWidget = () => {
             })
           andSearch =
             i > 0
-              ? andSearch.filter(x => termSearch.some(el => el.slug === x.slug))
-              : termSearch
+              ? andSearch.filter(x =>
+                  keywordSearch.some(el => el.slug === x.slug)
+                )
+              : keywordSearch
         })
       setResults(andSearch)
     } catch (error) {
