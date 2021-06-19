@@ -3,10 +3,10 @@ import Layout from "../components/layout"
 import SvgTile from "../components/svgtile"
 import SvgBg from "../components/svgbg"
 import MyLink from "../components/mylink"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
-export default () => {
+const Home = () => {
   const dataBg = useStaticQuery(graphql`
     {
       tartansCsv(fields: { slug: { eq: "wallace" } }) {
@@ -21,10 +21,10 @@ export default () => {
   })
   return (
     <Layout>
-      <SEO
+      <Seo
         description={`A ready-to use collection of tartan patterns. All available for download as seamless repetitive tiles in svg and png format.`}
         title={`5k+ Tartan Patterns`}
-      ></SEO>
+      ></Seo>
       <SvgBg svg={svg} />
       <section className="etiquette section-page section-home ">
         <header>
@@ -55,3 +55,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default Home

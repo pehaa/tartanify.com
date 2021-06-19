@@ -6,7 +6,7 @@ import SvgBg from "../components/svgbg"
 import MyLink from "../components/mylink"
 import PaletteEl from "../components/paletteel"
 import TartansNavigation from "../components/tartansnavigation"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const TartansTemplate = ({ pageContext }) => {
   const {
@@ -32,11 +32,11 @@ const TartansTemplate = ({ pageContext }) => {
   })
   return (
     <Layout>
-      <SEO
+      <Seo
         description={`All Tartans starting by letter ${letter.toUpperCase()} - page ${index +
           1} / ${pageCount}`}
         title={`${letter.toUpperCase()} - page ${index + 1}`}
-      ></SEO>
+      ></Seo>
       <SvgBg className="tartans-bg" svg={svg} />
       <TartansNavigation
         className="nav-top"

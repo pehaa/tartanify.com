@@ -2,10 +2,10 @@ import React from "react"
 import Layout from "../components/layout"
 import SvgTile from "../components/svgtile"
 import SvgBg from "../components/svgbg"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
-export default () => {
+const Page404 = () => {
   const dataBg = useStaticQuery(graphql`
     {
       tartansCsv(fields: { slug: { eq: "aon" } }) {
@@ -20,7 +20,7 @@ export default () => {
   })
   return (
     <Layout>
-      <SEO description={`404 error - Page not found.`} title={`404`}></SEO>
+      <Seo description={`404 error - Page not found.`} title={`404`}></Seo>
       <SvgBg svg={svg} />
       <section className="etiquette section-page section-404">
         <header>
@@ -34,3 +34,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default Page404

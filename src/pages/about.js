@@ -2,13 +2,13 @@ import React from "react"
 import Layout from "../components/layout"
 import SvgTile from "../components/svgtile"
 import SvgBg from "../components/svgbg"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import twitter from "../assets/icons-social-twitter.svg"
 import dribbble from "../assets/icons-social-dribble.svg"
 import codepen from "../assets/icons-social-codepen.svg"
 import { useStaticQuery, graphql } from "gatsby"
 
-export default () => {
+const About = () => {
   const dataBg = useStaticQuery(graphql`
     {
       tartansCsv(fields: { slug: { eq: "argentina" } }) {
@@ -23,10 +23,10 @@ export default () => {
   })
   return (
     <Layout>
-      <SEO
+      <Seo
         description={`All about the Tartanify.com project.`}
         title={`About`}
-      ></SEO>
+      ></Seo>
       <SvgBg svg={svg} />
       <section className="etiquette section-page section-about">
         <header>
@@ -167,3 +167,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default About

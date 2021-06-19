@@ -27,19 +27,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Alfa Slab One`,
-          },
-          {
-            family: `Barlow`,
-          },
-        ],
-      },
-    },
-    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-151000989-1",

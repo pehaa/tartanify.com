@@ -8,7 +8,7 @@ import svgAsString from "../components/svgasstring"
 import SvgDownloadLink from "../components/svgdownloadlink"
 import PngDownloadLink from "../components/pngdownloadlink"
 
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 export const query = graphql`
   query($id: String!) {
@@ -39,7 +39,7 @@ const TartanTemplate = props => {
 
   return (
     <Layout>
-      <SEO title={name} description={description}></SEO>
+      <Seo title={name} description={description}></Seo>
       <SvgBg svg={svg} />
       <TartanInfo
         name={name}

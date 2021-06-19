@@ -2,10 +2,10 @@ import React from "react"
 import Layout from "../components/layout"
 import SvgTile from "../components/svgtile"
 import SvgBg from "../components/svgbg"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import { useStaticQuery, graphql } from "gatsby"
 
-export default () => {
+const TermsOfUse = () => {
   const dataBg = useStaticQuery(graphql`
     {
       tartansCsv(fields: { slug: { eq: "lebrun" } }) {
@@ -20,10 +20,10 @@ export default () => {
   })
   return (
     <Layout>
-      <SEO
+      <Seo
         description={`Copyright and Restrictions.`}
         title={`Licence  information`}
-      ></SEO>
+      ></Seo>
       <SvgBg svg={svg} />
       <section className="etiquette section-page">
         <header>
@@ -74,3 +74,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default TermsOfUse

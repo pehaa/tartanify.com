@@ -2,11 +2,11 @@ import React from "react"
 import Header from "./header"
 import Footer from "./footer"
 import Share from "./share"
-import AZ from "./az"
+import Az from "./az"
 
 import "../styles/global.css"
 
-export default ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <main className="wrapper">
@@ -16,10 +16,12 @@ export default ({ children }) => {
       </main>
       <div className="sidebar">
         <nav>
-          <AZ />
+          <Az />
           <Share className="share-link" />
         </nav>
       </div>
     </>
   )
 }
+
+export default Layout
